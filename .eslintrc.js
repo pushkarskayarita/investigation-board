@@ -23,6 +23,7 @@ module.exports = {
     },
     rules: {
         'no-set-state': 0,
+        'no-console': "off",
         indent: ['error', 4, { SwitchCase: 1, VariableDeclarator: 1 }],
         'no-tabs': 0,
         'react/prop-types': 0,
@@ -35,7 +36,10 @@ module.exports = {
         'react/jsx-one-expression-per-line': 0,
         'react/require-default-props': 0,
         'import/prefer-default-export': 0,
-        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+        'import/no-extraneous-dependencies': [
+            'error',
+            { devDependencies: true },
+        ],
         'jsx-a11y/anchor-is-valid': [
             'error',
             {

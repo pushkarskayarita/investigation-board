@@ -1,7 +1,9 @@
 import express from 'express'
+// const express = require('express');
+
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import App from '../components/App'
+import App from './components/App'
 
 const server = express()
 server.use(express.static('dist'))
@@ -22,4 +24,4 @@ server.get('/', (req, res) => {
   `)
 })
 
-server.listen(3000, () => console.log('Server is running...'))
+server.listen(8080, () => console.log('Server is running...'))

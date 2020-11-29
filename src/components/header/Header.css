@@ -1,0 +1,24 @@
+.headerContainer{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    justify-content: space-between ;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0 ;
+}
+
+.headerLogoContainer{
+    width: 100%;
+    flex: 3;
+    font-size: 24px;
+    display: flex;
+    position: relative;
+    padding: 20px 40px;
+}
+
+.headerButtons{
+    flex: 1;
+    padding: 20px 40px;
+    /*height: 100%;*/
+    position: relative;
+}
