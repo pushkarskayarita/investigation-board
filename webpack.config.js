@@ -1,7 +1,6 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+// const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const clientConfig = {
     devtool: 'source-map',
@@ -50,22 +49,17 @@ const clientConfig = {
     },
     optimization: {
         minimize: true,
-        minimizer: [
-            new CssMinimizerPlugin(),
-        ],
+        minimizer: [new CssMinimizerPlugin()],
     },
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-        }),
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-}
+};
 
 const serverConfig = {
     target: 'node',
@@ -114,10 +108,6 @@ const serverConfig = {
                     },
                 },
             },
-            // {
-            //     test: /\.css$/,
-            //     use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }],
-            // },
             {
                 test: /\.css$/,
                 use: [
@@ -152,13 +142,10 @@ const serverConfig = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-        }),
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
     },
-}
+};
 
-module.exports = [serverConfig, clientConfig]
+module.exports = [serverConfig, clientConfig];

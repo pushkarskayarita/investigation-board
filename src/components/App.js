@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import MenuPanel from './menu/MenuPanel'
-import Board from './Board'
-import Header from './header/Header'
-import style from './App.css'
+import React from 'react';
+import MenuPanel from './menu/MenuPanel';
+import Board from './board/Board';
+import Header from './header/Header';
+import style from './App.css';
 
 export default function App() {
-    // const [count, setCount] = useState(0)
     return (
         <div className={style.wrapper}>
             <div className={style.headerContainer}>
@@ -21,8 +20,6 @@ export default function App() {
                     </div>
                 </div>
             </div>
-
-            {/*<button onClick={() => setCount(count + 1)}>{count}</button>*/}
         </div>
-    )
+    );
 }

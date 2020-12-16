@@ -2,11 +2,10 @@
     display: flex;
     background-color: #F8BF78;
     width: 100%;
+    height: 100%;
     max-width: 1080px;
     flex-wrap: wrap;
-    margin: 10px 0;
     position: relative;
-    border: 25px solid #9C6841;
     box-shadow: 0 2px 4px 0 rgba(34, 36, 38, .12), 0 2px 10px 0 rgba(34, 36, 38, .15);
 }
 
