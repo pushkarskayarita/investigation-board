@@ -1,38 +1,36 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import express from 'express';
 import renderer from './helpers/renderer';
-// import React from 'react';
-// import ReactDOMServer from 'react-dom/server';
-// import App from './components/App';
+import createStore from './helpers/createStore';
+import { loadData } from './components/FilesList';
 
+const test = [
+    {
+        id: 1,
+        name: 'file1.jpeg',
+    },
+    {
+        id: 2,
+        name: 'file2.jpeg',
+    },
+    {
+        id: 3,
+        name: 'file3.jpeg',
+    },
+];
 const server = express();
 server.use(express.static('dist'));
 
-// server.get('/', (req, res) => {
-//     const initialMarkup = ReactDOMServer.renderToString(<App />);
-//
-//     res.send(`
-//    <!DOCTYPE html>
-//     <html lang="en">
-//     <head>
-//     <meta charset="UTF-8">
-//     <link rel="preconnect" href="https://fonts.gstatic.com">
-//     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-//     <link rel="stylesheet" type="text/css"  href="client.css">
-//     <title>My Server Side App</title>
-//     </head>
-//     <body>
-//     <div id="mountNode">${initialMarkup}</div>
-//     <script src="client.bundle.js"></script>
-//     </body>
-//     </html>
-//
-//   `);
-// });
-
 server.get('/', (req, res) => {
-    // const initialMarkup = ReactDOMServer.renderToString(<App />);
+    const store = createStore();
+    loadData(store).then(() => {
+        res.send(renderer(store));
+    });
+});
 
-    res.send(renderer());
+server.get('/api/files', (req, res) => {
+    res.send(test);
 });
 
 server.listen(8080, () => console.log('Server is running...'));

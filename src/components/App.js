@@ -3,6 +3,7 @@ import MenuPanel from './menu/MenuPanel';
 import Board from './board/Board';
 import Header from './header/Header';
 import style from './App.css';
+import FilesList from './FilesList';
 
 export default function App() {
     return (
@@ -18,6 +19,7 @@ export default function App() {
                     <div className={style.boardContainer}>
                         <Board />
                     </div>
+                    <FilesList />
                 </div>
             </div>
         </div>

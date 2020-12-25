@@ -21,7 +21,6 @@ export function drawLine(
     const canvas = select(node);
 
     if (lines[lineId]) {
-        console.log('))))))))))))))))))))))) LINE ID?', lineId);
         lines[lineId].remove();
     }
 
