@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { initiateDB, getPicturesDB } from '../helpers/indexedDB';
+import { loadedPictures } from '../utils/loaded';
 import MenuPanel from './menu/MenuPanel';
 import Board from './board/Board';
 import Header from './header/Header';
 import style from './App.css';
-import FilesList from './FilesList';
+import { fetchPictures } from '../actions';
 
-export default function App() {
+const App = (props) => {
+    useEffect(() => {
+        initiateDB();
+        getPicturesDB().then((pictures) => {
+            const picturesIds = [];
+            pictures.forEach((picture) => {
+                loadedPictures[picture.id] = picture.file;
+                picturesIds.push(picture.id);
+            });
+
+            props.onFetchPictures(picturesIds);
+        });
+    }, []);
+
     return (
         <div className={style.wrapper}>
             <div className={style.headerContainer}>
@@ -19,9 +36,20 @@ export default function App() {
                     <div className={style.boardContainer}>
                         <Board />
                     </div>
-                    <FilesList />
                 </div>
             </div>
         </div>
     );
-}
+};
+
+const mapStateToProps = (state) => {
+    return { pictures: state.picturesData.pictures };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFetchPictures: (data) => dispatch(fetchPictures(data)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

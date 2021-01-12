@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'core-js/stable';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,16 +9,13 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 
 import App from './components/App';
+
 import reducers from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-    reducers,
-    window.INITIAL_STATE,
-    composeEnhancers(applyMiddleware(thunk))
-);
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
 
-ReactDOM.hydrate(
+ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,

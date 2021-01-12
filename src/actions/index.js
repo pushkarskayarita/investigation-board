@@ -1,22 +1,33 @@
-import axios from 'axios';
+import { addPictureDB, deletePictureDB } from '../helpers/indexedDB';
+import { loadedPictures } from '../utils/loaded';
 
-export const FETCH_USERS = 'fetch_users';
-export const FETCH_FILES = 'fetch_files';
+export const FETCH_PICTURES = 'FETCH_PICTURES';
+export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
+export const DELETE_PICTURE = 'DELETE_PICTURE';
 
-export const fetchUsers = () => async (dispatch) => {
-    const res = await axios.get('http://react-ssr-api.herokuapp.com/users');
+export const fetchPictures = (data) => {
+    return {
+        type: FETCH_PICTURES,
+        payload: data,
+    };
+};
+
+export const uploadPicture = (file) => async (dispatch) => {
+    const res = await addPictureDB(file);
+    loadedPictures[file.id] = file.file;
 
     dispatch({
-        type: FETCH_USERS,
+        type: UPLOAD_PICTURE,
         payload: res,
     });
 };
 
-export const fetchFiles = () => async (dispatch) => {
-    const res = await axios.get('http://localhost:8080/api/files');
+export const deletePicture = (id) => async (dispatch) => {
+    await deletePictureDB(id);
+    delete loadedPictures[id];
 
     dispatch({
-        type: FETCH_FILES,
-        payload: res,
+        type: DELETE_PICTURE,
+        payload: id,
     });
 };

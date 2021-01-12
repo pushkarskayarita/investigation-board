@@ -5,15 +5,12 @@
     flex-direction: column;
     border-right: 1px solid #E0E0E0;
     position: relative;
-
 }
 
-.buttonAddLink {
+.btnAddLink {
     background-color: #FF3333;
     max-width: 160px;
     border: none;
     padding: 10px;
     margin: 10px;
-}
-.buttonAddLink:focus {
 }
