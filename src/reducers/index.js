@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import filesReducer from './filesReducer';
+import picturesReducer from './picturesReducer';
 
 export default combineReducers({
-    files: filesReducer,
+    picturesData: picturesReducer,
 });
