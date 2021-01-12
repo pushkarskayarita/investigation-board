@@ -1,24 +1,15 @@
-import React from 'react'
-import style from './MenuPanel.css'
+import React from 'react';
+import UploadForm from '../upload/UploadForm';
+import style from './MenuPanel.css';
+import UploadedPicturesList from '../upload/UploadedPicturesList';
 
-class MenuPanel extends React.Component {
-    handleClick = () => {
-        console.log(this, 'Add link!')
-    }
+const MenuPanel = () => {
+    return (
+        <div className={style.container}>
+            <UploadForm />
+            <UploadedPicturesList />
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div className={style.container}>
-                Menu Panel
-                <button
-                    className={style.buttonAddLink}
-                    onClick={this.handleClick}
-                >
-                    Add link thread
-                </button>
-            </div>
-        )
-    }
-}
-
-export default MenuPanel
+export default MenuPanel;

@@ -1,0 +1,71 @@
+.gallery {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.card {
+    position: relative;
+    padding-bottom: 48%;
+    margin: 1%;
+    flex: 0 0 48%;
+    max-width: 48%;
+    overflow: hidden;
+}
+
+.gallery img {
+    position: absolute;
+    top: 0;
+    width: 150%;
+    height: auto;
+}
+
+.btn{
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+}
+
+.chose {
+    background-color: #EEEEEE;
+}
+
+.upload {
+    background-color: #416CA5;
+    color: #FAFAFA;
+}
+
+.deleteBtn {
+    width: 70px;
+    padding: 5px;
+    background-color: red;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.uploadForm {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.formTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.uploadForm label, .uploadForm span {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.hide {
+    display: none;
+}

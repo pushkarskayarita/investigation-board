@@ -1,15 +1,20 @@
-// const path = require('path');
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
-    devtool: 'source-map',
-    entry: {
-        client: './src/index.js',
-    },
     output: {
-        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, './dist'),
+        filename: 'bundle.js',
+        publicPath: 'http://localhost:8080',
     },
+    devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+        port: 8080,
+    },
+    entry: path.resolve(__dirname, './src/index.js'),
     module: {
         rules: [
             {
@@ -55,92 +60,9 @@ const clientConfig = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
-    ],
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
-};
-
-const serverConfig = {
-    target: 'node',
-    devtool: 'source-map',
-    entry: {
-        server: './src/server.js',
-    },
-    output: {
-        filename: '[name].bundle.js',
-        libraryTarget: 'commonjs',
-        // path: __dirname + '/dist',
-    },
-    externals: {
-        mongoose: 'mongoose',
-        passport: 'passport',
-        morgan: 'morgan',
-        multer: 'multer',
-        express: 'express',
-        bodyParser: 'body-parser',
-        cookieParser: 'cookie-parser',
-        multi: 'multi',
-        mongodb: 'mongodb',
-        encoding: 'encoding',
-        redux: 'redux',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            [
-                                '@babel/preset-env',
-                                {
-                                    targets: {
-                                        node: 'v14.15.0',
-                                    },
-                                    modules: false, // Needed for tree shaking to work.
-                                },
-                                '@babel/preset-react',
-                            ],
-                        ],
-                    },
-                },
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                localIdentName:
-                                    '[name]__[local]___[hash:base64:5]',
-                            },
-                        },
-                    },
-                    'postcss-loader',
-                ],
-            },
-            {
-                test: /\.(png|jpg|gif|svg)$/i,
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        name: '/images/[contenthash].[ext]',
-                    },
-                },
-            },
-        ],
-    },
-    optimization: {
-        minimize: true,
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            filename: 'index.html',
         }),
     ],
     resolve: {
@@ -148,4 +70,4 @@ const serverConfig = {
     },
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = clientConfig;
