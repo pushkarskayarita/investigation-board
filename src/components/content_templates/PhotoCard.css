@@ -1,0 +1,57 @@
+.polaroid {
+    margin: 50px;
+    height: 324px;
+    width: 264px;
+    background-color: #F5F5F5;
+    border-radius: 2px;
+    position: absolute;
+}
+
+.photoWrap{
+    width: 100%;
+    height: 80%;
+    display: block;
+    padding: 12px;
+}
+
+
+.photo{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid::before,
+.polaroid::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 40%;
+    height: 10px;
+    box-shadow: 0 9px 14px rgba(0,0,0,.9);
+    z-index: -1;
+    transition: all .3s ease-in-out;
+}
+
+.polaroid::before {
+    left: 15px;
+    transform: skew(-5deg) rotate(-5deg);
+}
+
+.polaroid::after {
+    right: 15px;
+    transform: skew(5deg) rotate(5deg);
+}
+
+/*.polaroid:hover::before,*/
+/*.polaroid:hover::after {*/
+/*    box-shadow: 0 2px 14px rgba(0,0,0,.4);*/
+/*}*/
+
+/*.polaroid:hover::before {*/
+/*    left: 5px;*/
+/*}*/
+
+/*.polaroid:hover::after {*/
+/*    right: 5px;*/
+/*}*/

@@ -23,7 +23,7 @@ module.exports = {
     },
     rules: {
         'no-set-state': 0,
-        'no-console': "off",
+        'no-console': 'off',
         indent: ['error', 4, { SwitchCase: 1, VariableDeclarator: 1 }],
         'no-tabs': 0,
         'react/prop-types': 0,
@@ -47,5 +47,6 @@ module.exports = {
                 specialLink: ['to'],
             },
         ],
+        // 'no-use-before-define': ['error', { variables: false }],
     },
-}
+};

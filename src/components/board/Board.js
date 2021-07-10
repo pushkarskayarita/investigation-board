@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import style from './Board.css';
 import LineRenderer from './lineRenderer/LineRenderer';
+
 
 function createPosition(x1, y1, x2, y2) {
     return { x1, y1, x2, y2 };
@@ -33,7 +35,6 @@ class Board extends React.Component {
         const left = clientX - containerCoords.left - container.clientLeft;
         const top = clientY - containerCoords.top - container.clientTop;
         const position = createPosition(left, top, left, top);
-
         this.setState((prevstate) => {
             return {
                 mousePositions: [...prevstate.mousePositions, position],
@@ -84,4 +85,8 @@ class Board extends React.Component {
     }
 }
 
-export default Board;
+const mapStateToProps = (state) => {
+    return { picturesBoard: state.picturesBoardData.picturesBoard };
+};
+
+export default connect(mapStateToProps)(Board);

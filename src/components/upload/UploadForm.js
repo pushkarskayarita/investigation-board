@@ -40,6 +40,7 @@ const UploadForm = (props) => {
                     onChange={onChangeHandler}
                     ref={inputEl}
                 />
+                <span>{fileTitle || 'Select file to upload'}</span>
                 <button
                     className={`${style.btn} ${style.chose}`}
                     onClick={(event) => {
@@ -48,12 +49,14 @@ const UploadForm = (props) => {
                         inputEl.current.click();
                     }}
                 >
-                    Choose file
+                    Choose image
                 </button>
-                <span>{fileTitle || 'Not chosen files, yet'}</span>
                 <button
-                    className={`${style.btn} ${style.upload}`}
+                    className={`${style.btn}  ${
+                        fileTitle ? style.active : style.upload
+                    }`}
                     type="submit"
+                    disabled={!fileTitle}
                 >
                     Upload image
                 </button>

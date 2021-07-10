@@ -28,6 +28,7 @@ const UploadedPicturesList = (props) => {
 
                         return loadedPictures[id] ? (
                             <UploadListItem
+                                onClick={props.onAddPicturesToBoardList}
                                 key={id}
                                 id={id}
                                 imageSrc={imageSrc}
@@ -43,7 +44,9 @@ const UploadedPicturesList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    return { pictures: state.picturesData.pictures };
+    return {
+        pictures: state.picturesData.pictures,
+    };
 };
 
 export default connect(mapStateToProps)(UploadedPicturesList);

@@ -3,11 +3,11 @@ import UploadForm from '../upload/UploadForm';
 import style from './MenuPanel.css';
 import UploadedPicturesList from '../upload/UploadedPicturesList';
 
-const MenuPanel = () => {
+const MenuPanel = ({ containerRef }) => {
     return (
         <div className={style.container}>
             <UploadForm />
-            <UploadedPicturesList />
+            <UploadedPicturesList containerRef={containerRef} />
         </div>
     );
 };
