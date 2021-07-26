@@ -23,6 +23,7 @@
 }
 
 .btn{
+    cursor: pointer;
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -36,6 +37,10 @@
 }
 
 .upload {
+    background-color: #EEEEEE;
+}
+
+.active{
     background-color: #416CA5;
     color: #FAFAFA;
 }

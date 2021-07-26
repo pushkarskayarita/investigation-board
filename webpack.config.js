@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+console.log('webpack config', __dirname);
+
 const clientConfig = {
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -46,7 +48,7 @@ const clientConfig = {
                 use: {
                     loader: 'file-loader',
                     options: {
-                        name: '/images/[contenthash].[ext]',
+                        name: '/images/[name].[ext]',
                     },
                 },
             },

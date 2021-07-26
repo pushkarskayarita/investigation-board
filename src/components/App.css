@@ -1,3 +1,82 @@
+/** {*/
+/*    box-sizing: border-box*/
+/*}*/
+
+/*html {*/
+/*    height: 100%;*/
+/*}*/
+
+/*body {*/
+/*    font-family: 'Lato', sans-serif;*/
+/*    box-sizing: border-box;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    height: 100%;*/
+/*}*/
+
+/*button{*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*    appearance: none;*/
+/*    background: transparent;*/
+/*    border: 0;*/
+/*}*/
+
+/*.wrapper {*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.layoutContainer {*/
+/*    width: 100%;*/
+/*    height: calc(100vh - 80px);*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.contentContainer {*/
+/*    width: 100%;*/
+/*    flex: 2 1;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.menuContainer {*/
+/*    display: flex;*/
+/*    flex: 1 0 30%;*/
+/*    height: 100%;*/
+/*    position: relative;*/
+/*    overflow-y: auto;*/
+/*    max-width: 320px;*/
+
+/*}*/
+
+/*.headerContainer {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    height: 80px;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    border-bottom: 1px solid #E0E0E0;*/
+/*}*/
+
+/*.boardContainer {*/
+/*    display: flex;*/
+/*    position: relative;*/
+/*    flex-direction: column;*/
+/*    width: 100%;*/
+/*    margin: 10px;*/
+/*    align-items: center;*/
+/*}*/
+
+
+
+/*.picturesContainer {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    width: 700px;*/
+/*}*/
 * {
     box-sizing: border-box
 }
@@ -38,8 +117,13 @@ button{
 .contentContainer {
     width: 100%;
     flex: 2 1;
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*border:3px solid deepskyblue;*/
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+
 }
 
 .menuContainer {
@@ -63,11 +147,12 @@ button{
 
 .boardContainer {
     display: flex;
-    position: relative;
-    flex-direction: column;
+    /*position: absolute;*/
+    top: 0;
     width: 100%;
-    margin: 10px;
-    align-items: center;
+    height: 100%;
+    justify-content: center;
+    /*border:6px solid green;*/
 }
 
 

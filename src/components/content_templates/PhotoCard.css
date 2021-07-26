@@ -1,0 +1,55 @@
+.polaroid {
+    background: #eee;
+    width: 100%;
+    padding: 5% 5% 30%;
+    position: relative;
+}
+
+.outer {
+    position: relative;
+    width: 100%;
+    padding-top: 98%; /* defines aspect ratio */
+}
+
+.inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.polaroid::before,
+.polaroid::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 40%;
+    height: 10px;
+    box-shadow: 0 5px 14px rgba(0,0,0,.99);
+    z-index: -1;
+    transition: all .3s ease-in-out;
+}
+
+.polaroid::before {
+    left: 15px;
+    transform: skew(-5deg) rotate(-5deg);
+}
+
+.polaroid::after {
+    right: 15px;
+    transform: skew(5deg) rotate(5deg);
+}
+
+
+
+
+
+
+
+
+

@@ -8,13 +8,13 @@ const UploadedPicturesList = (props) => {
     const { pictures } = props;
     const blobURLS = [];
 
-    useEffect(() => {
-        return () => {
-            blobURLS.forEach((url) => {
-                URL.revokeObjectURL(url);
-            });
-        };
-    }, [pictures]);
+    // useEffect(() => {
+    //     return () => {
+    //         blobURLS.forEach((url) => {
+    //             URL.revokeObjectURL(url);
+    //         });
+    //     };
+    // }, [pictures]); Why is this needed?????
 
     return (
         <>
@@ -24,10 +24,11 @@ const UploadedPicturesList = (props) => {
                         const imageSrc = loadedPictures[id]
                             ? URL.createObjectURL(loadedPictures[id])
                             : '';
-                        blobURLS.push(imageSrc);
+                        // blobURLS.push(imageSrc);
 
                         return loadedPictures[id] ? (
                             <UploadListItem
+                                onClick={props.onAddPicturesToBoardList} //???????????????????is this needed
                                 key={id}
                                 id={id}
                                 imageSrc={imageSrc}
@@ -43,7 +44,9 @@ const UploadedPicturesList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    return { pictures: state.picturesData.pictures };
+    return {
+        pictures: state.picturesData.pictures,
+    };
 };
 
 export default connect(mapStateToProps)(UploadedPicturesList);

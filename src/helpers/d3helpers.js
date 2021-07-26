@@ -34,3 +34,7 @@ export function drawLine(
 
     return lines[lineId];
 }
+
+export function drawPin() {
+    console.log('DRAW PIN  ');
+}
