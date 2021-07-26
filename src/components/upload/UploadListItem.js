@@ -2,18 +2,18 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import style from './Upload.css';
-import { addPictureToBoardList, deletePicture } from '../../actions';
+import { deletePicture } from '../../actions';
+import { addElementToBoard } from '../../actions/drag_and_drop_actios';
 
 let counter = 0;
 
 function UploadListItem(props) {
     const { id, imageSrc } = props;
-    // const [counter, setCounter] = useState(0);
+
     const [isHover, setIsHover] = useState(false);
     const uploadIconRef = useRef();
 
     const incrementCounter = () => {
-        console.log('COUNTER', counter);
         counter += 1;
     };
     const handleMouseEnter = () => {
@@ -28,10 +28,22 @@ function UploadListItem(props) {
     };
 
     const handleDragStart = (event) => {
-        // setCounter(counter + 1);
+        event.preventDefault();
         incrementCounter();
         const pictureBoardId = createPictureBoardId(id);
-        props.onAddPicturesToBoardList({ id: pictureBoardId, event, imageSrc });
+        const coords = event.target.getBoundingClientRect();
+        props.onAddElementToBoard({
+            id: pictureBoardId,
+            dragStartPositions: {
+                top: coords.top,
+                left: coords.left,
+                clientX: event.clientX,
+                clientY: event.clientY,
+            },
+            imageSrc,
+            elementName: 'img',
+            list: 'picturesBoard',
+        });
     };
 
     return (
@@ -64,8 +76,7 @@ const mapDispatchToProps = (dispatch) => {
         onDeletePicture: (data) => {
             dispatch(deletePicture(data));
         },
-        onAddPicturesToBoardList: (data) =>
-            dispatch(addPictureToBoardList(data)),
+        onAddElementToBoard: (data) => dispatch(addElementToBoard(data)),
     };
 };
 

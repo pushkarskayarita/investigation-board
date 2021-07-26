@@ -3,9 +3,13 @@ import style from './Note.css';
 
 function Note() {
     return (
-        <div contentEditable className={style.note}>
-            80 Columbus Circle <br />
-            4pm
+        <div className={`${style.note} ${style.outer} `}>
+            <div className={style.inner}>
+                <p>
+                    80 Columbus Circle <br />
+                    4pm
+                </p>
+            </div>
         </div>
     );
 }

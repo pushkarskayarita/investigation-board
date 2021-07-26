@@ -2,19 +2,30 @@ import React from 'react';
 import style from './PhotoCard.css';
 import image2 from '../../images/Rectangle.jpg';
 
-function PhotoCard() {
-    console.log('IMAGE2', image2);
+function PhotoCard({ imagePlaceholder }) {
+    console.log('IMAGE PLASEHOLDER', imagePlaceholder);
     return (
+        // <div className={style.testwraper}>
         <div className={style.polaroid}>
-            <div className={style.photoWrap}>
+            <div
+                className={
+                    imagePlaceholder
+                        ? `${style.outer} droppable`
+                        : `${style.outer}`
+                }
+            >
                 <img
-                    className={style.photo}
-                    // src="/images/photo1.jpg"
+                    className={
+                        imagePlaceholder
+                            ? `${style.inner} imagePlaceholder`
+                            : `${style.inner}`
+                    }
                     src={image2}
                     alt="polaroid"
                 />
             </div>
         </div>
+        // </div>
     );
 }
 

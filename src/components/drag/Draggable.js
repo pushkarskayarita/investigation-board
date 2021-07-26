@@ -1,28 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
+import { deleteElementFromBoard } from '../../actions/drag_and_drop_actios';
+import {
+    changeImageSrc,
+    findIsDroppable,
+    calculateElementShift,
+} from '../../utils/dragUtils';
 
-const boxWidth = 140;
-const boxHeight = 140;
+const boxWidth = 200;
 const containerMargin = 10;
 let sharedHandler = null;
+let isSrcChanged = false;
 
-const Draggable = ({ containerRef, startDrag, children }) => {
-    const [position, setPosition] = useState({ left: 0, top: 0 });
+const Draggable = ({
+    containerRef,
+    startDrag,
+    children,
+    onDeleteElementFromBoard,
+}) => {
+    const [position, setPosition] = useState({ left: -9999, top: -9999 });
+    // const [isSrcChanged, setIsSrcChanged] = useState(false);
     const elemRef = useRef();
+
     let currentTopPosition;
     let currentLeftPosition;
-    let shiftX;
-    let shiftY;
+    let elementShift;
 
-    const moveAt = (event) => {
+    const moveAt = (eventValues) => {
         currentLeftPosition =
-            event.clientX -
+            eventValues.clientX -
             containerRef.current.getBoundingClientRect().left -
-            shiftX;
+            elementShift.shiftX;
         currentTopPosition =
-            event.clientY -
+            eventValues.clientY -
             containerRef.current.getBoundingClientRect().top -
-            shiftY;
-
+            elementShift.shiftY;
         setPosition({
             left: currentLeftPosition,
             top: currentTopPosition,
@@ -35,7 +47,10 @@ const Draggable = ({ containerRef, startDrag, children }) => {
         const limitRight =
             containerRef.current.clientWidth + containerMargin - boxWidth;
         const limitBottom =
-            containerRef.current.clientHeight + containerMargin - boxWidth;
+            containerRef.current.clientHeight +
+            containerMargin -
+            elemRef.current.offsetHeight;
+        //654 + 10 - 200 = 464
         if (currentTopPosition <= limitTop) {
             setPosition({
                 top: limitTop,
@@ -58,11 +73,10 @@ const Draggable = ({ containerRef, startDrag, children }) => {
         }
     };
 
-    const onDragStart = (event) => {
-        shiftX = event.clientX - event.target.getBoundingClientRect().left;
-        shiftY = event.clientY - event.target.getBoundingClientRect().top;
+    const onDragStart = (eventValues, initialDrag) => {
+        elementShift = calculateElementShift(eventValues, elemRef, initialDrag);
 
-        moveAt(event);
+        moveAt(eventValues);
         if (sharedHandler) {
             document.removeEventListener('mousemove', sharedHandler);
         }
@@ -71,23 +85,46 @@ const Draggable = ({ containerRef, startDrag, children }) => {
         document.addEventListener('mousemove', sharedHandler);
     };
 
+    //When event is passed from li useEffect works
     useEffect(() => {
-        console.log('USEEFFECT DRAGGABLE');
-
-        onDragStart(startDrag.event);
-    }, [startDrag]);
+        onDragStart(startDrag.dragStartPositions, true);
+    }, []);
 
     const handleMouseDown = (event) => {
-        console.log('My turn!!! handle mouseDown draggable');
-        onDragStart(event);
+        const eventValues = {
+            clientX: event.clientX,
+            clientY: event.clientY,
+        };
+        onDragStart(eventValues, false);
     };
 
     const handleMouseMove = (event) => {
-        moveAt(event);
+        const eventValues = {
+            clientX: event.clientX,
+            clientY: event.clientY,
+        };
+        moveAt(eventValues);
         constrainBorders(event);
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (event) => {
+        const droppable = findIsDroppable(
+            event.clientX,
+            event.clientY,
+            elemRef
+        );
+        console.log('DROPPABLE________________', droppable);
+        if (droppable) {
+            isSrcChanged = changeImageSrc(droppable, startDrag.imageSrc);
+            if (isSrcChanged) {
+                onDeleteElementFromBoard(startDrag.id, startDrag.list);
+            }
+        }
+
+        if (!droppable) {
+            onDeleteElementFromBoard(startDrag.id, startDrag.list);
+        }
+
         document.removeEventListener('mousemove', sharedHandler);
         document.removeEventListener('mouseup', handleMouseUp);
         sharedHandler = null;
@@ -103,27 +140,29 @@ const Draggable = ({ containerRef, startDrag, children }) => {
                     left: position ? `${position.left}px` : undefined,
                     top: position ? `${position.top}px` : undefined,
                     width: boxWidth,
-                    height: boxHeight,
-                    backgroundColor: 'red',
+                    maxWidth: boxWidth,
                 }}
-                onDragStart={() => {
-                    return false;
-                }}
+                onDragStart={(event) => event.preventDefault()}
                 onMouseDown={handleMouseDown}
             >
                 {children}
-                <div>
-                    left:${position.left} top: ${position.top} clientHeight: $
-                    {document.documentElement.clientHeight} containerHeight: $
-                    {containerRef.current.getBoundingClientRect().height + 20}{' '}
-                    result$
-                    {document.documentElement.clientHeight -
-                        (containerRef.current.getBoundingClientRect().height +
-                            20)}
-                </div>
             </div>
         </>
     );
 };
 
-export default Draggable;
+const mapStateToProps = (state) => {
+    return {
+        pictures: state.picturesData.pictures,
+        picturesBoard: state.picturesBoardData.picturesBoard,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDeleteElementFromBoard: (id, list) =>
+            dispatch(deleteElementFromBoard(id, list)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Draggable);
