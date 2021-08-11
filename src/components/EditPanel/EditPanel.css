@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+}
+.panel{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+}
+
+.panelButton{
+    color:#000000;
+    cursor: pointer;
+    padding:0 10px ;
+    margin-right: 10px;
+
+}
+
+.pushRight {
+    margin-left: auto;
+    margin-right: 0;
+}

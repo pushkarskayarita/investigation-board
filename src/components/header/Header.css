@@ -1,22 +1,23 @@
-.headerContainer{
+.headerContainer {
     display: flex;
     width: 100%;
     height: 80px;
-    justify-content: space-between ;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #E0E0E0 ;
 }
 
-.headerLogoContainer{
+.headerLogoContainer {
     width: 100%;
     flex: 3;
     font-size: 24px;
     display: flex;
     position: relative;
     padding: 20px 40px;
+    font-family: 'Lato', sans-serif;
+    color:#004276;
 }
 
-.headerButtons{
+.headerButtons {
     flex: 1;
     padding: 20px 40px;
     position: relative;
@@ -24,5 +25,5 @@
 
 .headerContainer a {
     text-decoration: none;
-    color: red;
+    color:#004276;
 }

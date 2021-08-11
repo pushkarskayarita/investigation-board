@@ -3,9 +3,7 @@ import style from './PhotoCard.css';
 import image2 from '../../images/Rectangle.jpg';
 
 function PhotoCard({ imagePlaceholder }) {
-    console.log('IMAGE PLASEHOLDER', imagePlaceholder);
     return (
-        // <div className={style.testwraper}>
         <div className={style.polaroid}>
             <div
                 className={
@@ -25,7 +23,6 @@ function PhotoCard({ imagePlaceholder }) {
                 />
             </div>
         </div>
-        // </div>
     );
 }
 

@@ -1,13 +1,13 @@
 import { path } from 'd3-path';
 import { select } from 'd3-selection';
 
-export function removePath(line) {
-    if (line) {
-        line.remove();
+export const lines = {};
+
+export function removePath(lineId) {
+    if (lines[lineId]) {
+        lines[lineId].remove();
     }
 }
-
-export const lines = {};
 
 export function drawLine(
     node,
@@ -33,8 +33,4 @@ export function drawLine(
         .attr('d', context.toString());
 
     return lines[lineId];
-}
-
-export function drawPin() {
-    console.log('DRAW PIN  ');
 }

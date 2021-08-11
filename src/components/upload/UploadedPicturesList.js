@@ -28,7 +28,6 @@ const UploadedPicturesList = (props) => {
 
                         return loadedPictures[id] ? (
                             <UploadListItem
-                                onClick={props.onAddPicturesToBoardList} //???????????????????is this needed
                                 key={id}
                                 id={id}
                                 imageSrc={imageSrc}

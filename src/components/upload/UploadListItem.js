@@ -50,7 +50,6 @@ function UploadListItem(props) {
         <li
             ref={uploadIconRef}
             className={style.card}
-            key={id}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onDragStart={handleDragStart}

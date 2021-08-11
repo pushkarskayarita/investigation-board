@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { uploadPicture } from '../../actions';
 import style from './Upload.css';
 
@@ -22,7 +23,7 @@ const UploadForm = (props) => {
                     event.preventDefault();
                     if (fileTitle) {
                         props.uploadPicture({
-                            id: fileTitle,
+                            id: nanoid(8),
                             title: fileTitle,
                             file,
                         });

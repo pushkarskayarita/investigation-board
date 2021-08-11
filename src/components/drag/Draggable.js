@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { deleteElementFromBoard } from '../../actions/drag_and_drop_actios';
+import {
+    deleteElementFromBoard,
+    selectElement,
+} from '../../actions/drag_and_drop_actios';
 import {
     changeImageSrc,
     findIsDroppable,
     calculateElementShift,
 } from '../../utils/dragUtils';
+import style from './Draggable.css';
 
 const boxWidth = 200;
 const containerMargin = 10;
@@ -17,11 +21,12 @@ const Draggable = ({
     startDrag,
     children,
     onDeleteElementFromBoard,
+    onSelectElement,
+    picturesBoardData,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
-    // const [isSrcChanged, setIsSrcChanged] = useState(false);
     const elemRef = useRef();
-
+    const { pinMode, activeElement, isEditing } = picturesBoardData;
     let currentTopPosition;
     let currentLeftPosition;
     let elementShift;
@@ -74,6 +79,7 @@ const Draggable = ({
     };
 
     const onDragStart = (eventValues, initialDrag) => {
+        onSelectElement(startDrag.id);
         elementShift = calculateElementShift(eventValues, elemRef, initialDrag);
 
         moveAt(eventValues);
@@ -91,11 +97,16 @@ const Draggable = ({
     }, []);
 
     const handleMouseDown = (event) => {
-        const eventValues = {
-            clientX: event.clientX,
-            clientY: event.clientY,
-        };
-        onDragStart(eventValues, false);
+        if (pinMode) {
+            console.log('draggable id', startDrag.id);
+            return;
+        } else {
+            const eventValues = {
+                clientX: event.clientX,
+                clientY: event.clientY,
+            };
+            onDragStart(eventValues, false);
+        }
     };
 
     const handleMouseMove = (event) => {
@@ -113,7 +124,6 @@ const Draggable = ({
             event.clientY,
             elemRef
         );
-        console.log('DROPPABLE________________', droppable);
         if (droppable) {
             isSrcChanged = changeImageSrc(droppable, startDrag.imageSrc);
             if (isSrcChanged) {
@@ -141,7 +151,13 @@ const Draggable = ({
                     top: position ? `${position.top}px` : undefined,
                     width: boxWidth,
                     maxWidth: boxWidth,
+                    // pointerEvents: pinMode && isEditing ? 'none' : '',
                 }}
+                className={
+                    activeElement === startDrag.id
+                        ? `${style.active} boardItem`
+                        : 'boardItem'
+                }
                 onDragStart={(event) => event.preventDefault()}
                 onMouseDown={handleMouseDown}
             >
@@ -154,7 +170,8 @@ const Draggable = ({
 const mapStateToProps = (state) => {
     return {
         pictures: state.picturesData.pictures,
-        picturesBoard: state.picturesBoardData.picturesBoard,
+        activeElement: state.picturesBoardData.activeElement,
+        picturesBoardData: state.picturesBoardData,
     };
 };
 
@@ -162,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteElementFromBoard: (id, list) =>
             dispatch(deleteElementFromBoard(id, list)),
+        onSelectElement: (id) => dispatch(selectElement(id)),
     };
 };
 

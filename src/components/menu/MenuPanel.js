@@ -47,8 +47,6 @@ const MenuPanel = (props) => {
                             key={template.id}
                             className={style.templateItem}
                             onDragStart={(event) => {
-                                // log(event);
-                                // console.log('Event onstartDrag', event);
                                 event.preventDefault();
                                 handleDragStart(
                                     event,

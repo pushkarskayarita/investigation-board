@@ -22,25 +22,33 @@
     height: auto;
 }
 
-.btn{
+.btn {
     cursor: pointer;
-    width: 100%;
+   width:100%;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 10px 0px;
     letter-spacing: 0.5px;
+    color:black;
+    /*background-color: #416CA5;*/
 }
 
 .chose {
-    background-color: #EEEEEE;
+    border: 1px solid #416ca5;
+    color:#416ca5;
+    font-family: 'Roboto', sans-serif;
 }
+
+/*button.btn.chose:hover {*/
+
+/*}*/
 
 .upload {
     background-color: #EEEEEE;
 }
 
-.active{
+.active {
     background-color: #416CA5;
     color: #FAFAFA;
 }
@@ -58,6 +66,7 @@
 .uploadForm {
     display: flex;
     flex-wrap: wrap;
+    /*justify-content: center;*/
     padding: 20px;
 }
 

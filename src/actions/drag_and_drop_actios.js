@@ -1,5 +1,8 @@
 export const DELETE_ELEMENT_FROM_BOARD = 'DELETE_ELEMENT_FROM_BOARD';
 export const ADD_ELEMENT_TO_BOARD = 'ADD_ELEMENT_TO_BOARD';
+export const SELECT_ELEMENT = 'SELECT_ELEMENT';
+export const ADD_PIN = 'ADD_PIN';
+export const DONE_EDITING = 'DONE_EDITING';
 
 export const addElementToBoard = (startDrag) => {
     return (dispatch) => {
@@ -14,5 +17,24 @@ export const deleteElementFromBoard = (id, list) => {
     return {
         type: DELETE_ELEMENT_FROM_BOARD,
         payload: { id, list },
+    };
+};
+
+export const selectElement = (id) => {
+    return {
+        type: SELECT_ELEMENT,
+        payload: id,
+    };
+};
+
+export const addPin = () => {
+    return {
+        type: ADD_PIN,
+    };
+};
+
+export const doneEditing = () => {
+    return {
+        type: DONE_EDITING,
     };
 };

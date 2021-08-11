@@ -8,14 +8,16 @@ import Header from './header/Header';
 import Draggable from './drag/Draggable';
 import style from './App.css';
 import { fetchPictures } from '../actions';
-import { componentsNames, templates } from '../utils/templates';
-import LinesContainer from './board/lineRenderer/LinesContainer';
+import { templates } from '../utils/templates';
+import LinesContainer2 from './board/lineRenderer/LinesContainer2';
+import EditPanel from './EditPanel/EditPanel';
 
 const styles = {
     backgroundColor: '#416CA5',
     width: '100px',
     height: '100px',
 };
+
 const App = (props) => {
     useEffect(() => {
         initiateDB();
@@ -43,48 +45,60 @@ const App = (props) => {
                     <MenuPanel containerRef={menuRef} />
                 </div>
                 <div className={style.contentContainer}>
-                    <div
-                        className={`${style.boardContainer} droppable`}
-                        ref={boardRef}
-                    >
-                        <Board />
-                        {props.templatesBoard.map((item) => {
-                            const elem = templates.find(
-                                (template) => template.id === item.elementName
-                            );
-                            const TemplateBoard = elem[item.elementName];
-                            return (
-                                <Draggable
-                                    key={item.id}
-                                    containerRef={boardRef}
-                                    startDrag={item}
-                                >
-                                    <TemplateBoard imagePlaceholder={true} />
-                                </Draggable>
-                            );
-                        })}
-                        {props.picturesBoard.map((item, index) => {
-                            return (
-                                <Draggable
-                                    key={item.id}
-                                    containerRef={boardRef}
-                                    startDrag={item}
-                                >
-                                    <img
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            display: 'block',
-                                        }}
-                                        src={item.imageSrc}
-                                        alt={item.id}
-                                    />
-                                </Draggable>
-                            );
-                        })}
+                    <EditPanel />
+
+                    <div className={`${style.boardContainer} droppable`}>
+                        <div
+                            onMouseDown={() => {
+                                // console.log('im here');
+                            }}
+                            className={style.boardFrame}
+                            ref={boardRef}
+                        >
+                            <div className={style.boardBackground} />
+                            <LinesContainer2>
+                                {props.templatesBoard.map((item) => {
+                                    const elem = templates.find(
+                                        (template) =>
+                                            template.id === item.elementName
+                                    );
+                                    const TemplateBoard =
+                                        elem[item.elementName];
+                                    return (
+                                        <Draggable
+                                            key={item.id}
+                                            containerRef={boardRef}
+                                            startDrag={item}
+                                        >
+                                            <TemplateBoard
+                                                imagePlaceholder={true}
+                                            />
+                                        </Draggable>
+                                    );
+                                })}
+                                {props.picturesBoard.map((item, index) => {
+                                    return (
+                                        <Draggable
+                                            key={item.id}
+                                            containerRef={boardRef}
+                                            startDrag={item}
+                                        >
+                                            <img
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    display: 'block',
+                                                }}
+                                                src={item.imageSrc}
+                                                alt={item.id}
+                                            />
+                                        </Draggable>
+                                    );
+                                })}
+                            </LinesContainer2>
+                        </div>
                     </div>
-                    <LinesContainer />
                 </div>
             </div>
         </div>
@@ -96,6 +110,7 @@ const mapStateToProps = (state) => {
         pictures: state.picturesData.pictures,
         picturesBoard: state.picturesBoardData.picturesBoard,
         templatesBoard: state.picturesBoardData.templatesBoard,
+        picturesBoardData: state.picturesBoardData,
     };
 };
 
