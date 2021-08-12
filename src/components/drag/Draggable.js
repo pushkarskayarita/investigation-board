@@ -23,10 +23,11 @@ const Draggable = ({
     onDeleteElementFromBoard,
     onSelectElement,
     picturesBoardData,
+    pinMode,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
     const elemRef = useRef();
-    const { pinMode, activeElement, isEditing } = picturesBoardData;
+    const { activeElement } = picturesBoardData;
     let currentTopPosition;
     let currentLeftPosition;
     let elementShift;
@@ -91,7 +92,7 @@ const Draggable = ({
         document.addEventListener('mousemove', sharedHandler);
     };
 
-    //When event is passed from li useEffect works
+    // When event is passed from li useEffect works
     useEffect(() => {
         onDragStart(startDrag.dragStartPositions, true);
     }, []);
@@ -99,7 +100,6 @@ const Draggable = ({
     const handleMouseDown = (event) => {
         if (pinMode) {
             console.log('draggable id', startDrag.id);
-            return;
         } else {
             const eventValues = {
                 clientX: event.clientX,
@@ -151,7 +151,6 @@ const Draggable = ({
                     top: position ? `${position.top}px` : undefined,
                     width: boxWidth,
                     maxWidth: boxWidth,
-                    // pointerEvents: pinMode && isEditing ? 'none' : '',
                 }}
                 className={
                     activeElement === startDrag.id
@@ -172,6 +171,7 @@ const mapStateToProps = (state) => {
         pictures: state.picturesData.pictures,
         activeElement: state.picturesBoardData.activeElement,
         picturesBoardData: state.picturesBoardData,
+        pinMode: state.editPanel.pinMode,
     };
 };
 

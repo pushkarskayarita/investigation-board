@@ -55,6 +55,13 @@ svg {
     list-style: none;
 }
 
+.linesContainer ul{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
 :global {
 
 body {

@@ -10,7 +10,7 @@ import {
     updatePinEnd,
     setDragablePin,
 } from '../../../actions/lines_actions';
-import LineRenderer2 from '../lineRenderer/LineRenderer2';
+import LineRenderer2 from './LineRenderer2';
 import Pin from './Pin';
 import style from './lineRenderer.css';
 import { calcCoordsRelativeToContainer } from '../../../utils/linesUtils';
@@ -98,16 +98,18 @@ class LinesContainer2 extends React.Component {
                 className={`${style.linesContainer} droppable `}
                 ref={this.pathContainer}
             >
-                {Object.keys(this.props.linesData.pins).map((pin) => {
-                    return (
-                        <Pin
-                            key={pin}
-                            position={this.props.linesData.pins[pin]}
-                            draggablePin={this.props.linesData.draggablePin}
-                            id={pin}
-                        />
-                    );
-                })}
+                <ul>
+                    {Object.keys(this.props.linesData.pins).map((pin) => {
+                        return (
+                            <Pin
+                                key={pin}
+                                position={this.props.linesData.pins[pin]}
+                                draggablePin={this.props.linesData.draggablePin}
+                                id={pin}
+                            />
+                        );
+                    })}
+                </ul>
 
                 {this.props.children}
                 <LineRenderer2 linesData={this.props.linesData} />
@@ -119,8 +121,8 @@ class LinesContainer2 extends React.Component {
 const mapStateToProps = (state) => {
     return {
         linesData: state.lines,
-        pinMode: state.picturesBoardData.pinMode,
-        isEditing: state.picturesBoardData.isEditing,
+        pinMode: state.editPanel.pinMode,
+        isEditing: state.editPanel.isEditing,
     };
 };
 
