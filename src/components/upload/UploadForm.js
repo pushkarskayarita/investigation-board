@@ -43,10 +43,10 @@ const UploadForm = (props) => {
                 />
                 <span>{fileTitle || 'Select file to upload'}</span>
                 <button
+                    type="button"
                     className={`${style.btn} ${style.chose}`}
                     onClick={(event) => {
                         event.preventDefault();
-                        console.log(inputEl);
                         inputEl.current.click();
                     }}
                 >

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
     deleteElementFromBoard,
     selectElement,
-} from '../../actions/drag_and_drop_actios';
+} from '../../actions/board_actios';
 import {
     changeImageSrc,
     findIsDroppable,
@@ -22,12 +22,12 @@ const Draggable = ({
     children,
     onDeleteElementFromBoard,
     onSelectElement,
-    picturesBoardData,
+    boardData,
     pinMode,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
     const elemRef = useRef();
-    const { activeElement } = picturesBoardData;
+    const { activeElement } = boardData;
     let currentTopPosition;
     let currentLeftPosition;
     let elementShift;
@@ -56,7 +56,7 @@ const Draggable = ({
             containerRef.current.clientHeight +
             containerMargin -
             elemRef.current.offsetHeight;
-        //654 + 10 - 200 = 464
+        // 654 + 10 - 200 = 464
         if (currentTopPosition <= limitTop) {
             setPosition({
                 top: limitTop,
@@ -80,14 +80,16 @@ const Draggable = ({
     };
 
     const onDragStart = (eventValues, initialDrag) => {
-        onSelectElement(startDrag.id);
+        onSelectElement(startDrag.id, startDrag.list);
         elementShift = calculateElementShift(eventValues, elemRef, initialDrag);
 
         moveAt(eventValues);
         if (sharedHandler) {
             document.removeEventListener('mousemove', sharedHandler);
         }
+        // eslint-disable-next-line no-use-before-define
         sharedHandler = handleMouseMove;
+        // eslint-disable-next-line no-use-before-define
         document.addEventListener('mouseup', handleMouseUp);
         document.addEventListener('mousemove', sharedHandler);
     };
@@ -98,8 +100,9 @@ const Draggable = ({
     }, []);
 
     const handleMouseDown = (event) => {
+        // console.log('DRAAGGABLE mouse down');
         if (pinMode) {
-            console.log('draggable id', startDrag.id);
+            // console.log('draggable id', startDrag.id);
         } else {
             const eventValues = {
                 clientX: event.clientX,
@@ -153,7 +156,7 @@ const Draggable = ({
                     maxWidth: boxWidth,
                 }}
                 className={
-                    activeElement === startDrag.id
+                    activeElement.id === startDrag.id
                         ? `${style.active} boardItem`
                         : 'boardItem'
                 }
@@ -169,8 +172,7 @@ const Draggable = ({
 const mapStateToProps = (state) => {
     return {
         pictures: state.picturesData.pictures,
-        activeElement: state.picturesBoardData.activeElement,
-        picturesBoardData: state.picturesBoardData,
+        boardData: state.boardData,
         pinMode: state.editPanel.pinMode,
     };
 };
@@ -179,7 +181,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteElementFromBoard: (id, list) =>
             dispatch(deleteElementFromBoard(id, list)),
-        onSelectElement: (id) => dispatch(selectElement(id)),
+        onSelectElement: (id, list) => dispatch(selectElement(id, list)),
     };
 };
 

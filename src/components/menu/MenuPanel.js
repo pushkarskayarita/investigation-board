@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import UploadForm from '../upload/UploadForm';
 import style from './MenuPanel.css';
 import UploadedPicturesList from '../upload/UploadedPicturesList';
-import { addElementToBoard } from '../../actions/drag_and_drop_actios';
+import { addElementToBoard } from '../../actions/board_actios';
 import { deletePicture } from '../../actions';
 import { templates, componentsNames } from '../../utils/templates';
 

@@ -18,9 +18,9 @@ export const deleteElementFromBoard = (id, list) => {
     };
 };
 
-export const selectElement = (id) => {
+export const selectElement = (id, list) => {
     return {
         type: SELECT_ELEMENT,
-        payload: id,
+        payload: { id, list },
     };
 };

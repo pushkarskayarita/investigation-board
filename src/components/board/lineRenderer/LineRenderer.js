@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './lineRenderer.css';
-import { drawLine, lines } from '../../../helpers/d3helpers';
+import { drawLine, removePath, selectLine } from '../../../helpers/d3helpers';
 
 class LineRenderer extends Component {
     constructor(props) {
@@ -18,30 +18,65 @@ class LineRenderer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { mousePositions } = this.props;
-        if (prevProps.mousePositions !== mousePositions) {
+        if (
+            this.props.linesData !== prevProps.linesData ||
+            Object.keys(prevProps.linesData.linesKeysMap).every(
+                (lineKey, i) => {
+                    return (
+                        lineKey !==
+                        Object.keys(this.props.linesData.linesKeysMap)[i]
+                    );
+                }
+            )
+        ) {
+            // console.log('props changed');
             this.renderLines();
+            selectLine(this.props.linesData.selectedLine);
+        } else {
+            // console.log('the same');
         }
     }
 
     renderLines = () => {
-        const { mousePositions } = this.props;
+        const { linesKeysMap, pins } = this.props.linesData;
+        const { onSelectElement } = this.props;
+        // should remove previous before render new!
+        Object.entries(linesKeysMap).forEach(([id, line]) => {
+            removePath(line, id);
+        });
 
-        mousePositions.forEach((position, i) => {
-            lines[i] = drawLine(
+        Object.keys(linesKeysMap).forEach((line) => {
+            const originX = pins[linesKeysMap[line].start].x;
+            const originY = pins[linesKeysMap[line].start].y;
+            const destinationX = pins[linesKeysMap[line].end].x;
+            const destinationY = pins[linesKeysMap[line].end].y;
+
+            drawLine(
                 this.state.container,
-                position.x1,
-                position.y1,
-                position.x2,
-                position.y2,
-                i
+                originX,
+                originY,
+                destinationX,
+                destinationY,
+                line,
+                onSelectElement
             );
         });
     };
 
     render() {
+        const { pinMode, deleteConnection } = this.props;
         return (
-            <div key="divCurve" className={styles.pathContainer}>
+            <div
+                style={
+                    pinMode || deleteConnection
+                        ? { pointerEvents: 'auto' }
+                        : { pointerEvents: 'none' }
+                }
+                className={styles.pathContainer}
+                onMouseDown={() => {
+                    // console.log('mouseDOWWNNNNNNN!!!!!');
+                }}
+            >
                 <svg
                     key="svgCurve"
                     ref={this.pathContainer}

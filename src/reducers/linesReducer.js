@@ -2,11 +2,16 @@ import {
     SET_START,
     SET_END,
     FINISH_DRAW,
-    SAVE_LINE,
     SAVE_PIN,
     UPDATE_PIN_END,
+    DELETE_RELATED_PINS,
     SET_DRAGGABLE_PIN,
+    SAVE_LINE,
 } from '../actions/lines_actions';
+import {
+    DELETE_ELEMENT_FROM_BOARD,
+    SELECT_ELEMENT,
+} from '../actions/board_actios';
 
 const initialState = {
     startPoint: null,
@@ -15,6 +20,8 @@ const initialState = {
     drawing: false,
     pins: {},
     linesKeysMap: {},
+    selectedLine: null,
+    // selectedPins: [],
 };
 
 export default (state = initialState, action) => {
@@ -59,11 +66,51 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload.coords,
                 },
             };
+        case DELETE_RELATED_PINS: {
+            const filteresIds = Object.keys(state.pins).filter((pin) => {
+                return (
+                    pin === state.linesKeysMap[action.payload].start ||
+                    pin === state.linesKeysMap[action.payload].end
+                );
+            });
+            const {
+                [filteresIds[0]]: foo,
+                [filteresIds[1]]: bar,
+                ...updatedPins
+            } = state.pins;
+            return {
+                ...state,
+                pins: updatedPins,
+            };
+        }
         case SET_DRAGGABLE_PIN:
             return {
                 ...state,
                 draggablePin: action.payload,
             };
+        case SELECT_ELEMENT:
+            if (action.payload.list === 'lines')
+                return {
+                    ...state,
+                    selectedLine: action.payload.id,
+                };
+
+            return {
+                ...state,
+                selectedLine: null,
+            };
+        case DELETE_ELEMENT_FROM_BOARD: {
+            const id = state.selectedLine;
+            const {
+                [id]: anyshit,
+                ...updatedLinesKeysMap
+            } = state.linesKeysMap;
+            return {
+                ...state,
+                linesKeysMap: updatedLinesKeysMap,
+                selectedLine: null,
+            };
+        }
         default:
             return state;
     }

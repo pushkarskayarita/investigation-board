@@ -3,22 +3,16 @@ import { connect } from 'react-redux';
 import { initiateDB, getPicturesDB } from '../helpers/indexedDB';
 import { loadedPictures } from '../utils/loaded';
 import MenuPanel from './menu/MenuPanel';
-import Board from './board/Board';
 import Header from './header/Header';
 import Draggable from './drag/Draggable';
 import style from './App.css';
 import { fetchPictures } from '../actions';
 import { templates } from '../utils/templates';
-import LinesContainer2 from './board/lineRenderer/LinesContainer2';
+import LinesContainer from './board/lineRenderer/LinesContainer';
 import EditPanel from './EditPanel/EditPanel';
 
-const styles = {
-    backgroundColor: '#416CA5',
-    width: '100px',
-    height: '100px',
-};
-
 const App = (props) => {
+    const { picturesBoard, templatesBoard } = props.boardData;
     useEffect(() => {
         initiateDB();
         getPicturesDB().then((pictures) => {
@@ -27,7 +21,6 @@ const App = (props) => {
                 loadedPictures[picture.id] = picture.file;
                 picturesIds.push(picture.id);
             });
-
             props.onFetchPictures(picturesIds);
         });
     }, []);
@@ -46,7 +39,6 @@ const App = (props) => {
                 </div>
                 <div className={style.contentContainer}>
                     <EditPanel />
-
                     <div className={`${style.boardContainer} droppable`}>
                         <div
                             onMouseDown={() => {
@@ -56,8 +48,8 @@ const App = (props) => {
                             ref={boardRef}
                         >
                             <div className={style.boardBackground} />
-                            <LinesContainer2>
-                                {props.templatesBoard.map((item) => {
+                            <LinesContainer>
+                                {templatesBoard.map((item) => {
                                     const elem = templates.find(
                                         (template) =>
                                             template.id === item.elementName
@@ -76,7 +68,7 @@ const App = (props) => {
                                         </Draggable>
                                     );
                                 })}
-                                {props.picturesBoard.map((item, index) => {
+                                {picturesBoard.map((item) => {
                                     return (
                                         <Draggable
                                             key={item.id}
@@ -96,7 +88,7 @@ const App = (props) => {
                                         </Draggable>
                                     );
                                 })}
-                            </LinesContainer2>
+                            </LinesContainer>
                         </div>
                     </div>
                 </div>
@@ -108,9 +100,7 @@ const App = (props) => {
 const mapStateToProps = (state) => {
     return {
         pictures: state.picturesData.pictures,
-        picturesBoard: state.picturesBoardData.picturesBoard,
-        templatesBoard: state.picturesBoardData.templatesBoard,
-        picturesBoardData: state.picturesBoardData,
+        boardData: state.boardData,
     };
 };
 

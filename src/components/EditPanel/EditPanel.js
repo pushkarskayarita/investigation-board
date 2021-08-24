@@ -1,51 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import style from './EditPanel.css';
-import AddPinButton from './AddPinButton';
-import DeleteElementButton from './DeleteElementButton';
-import ResizeElementButton from './ResizeElementButton';
-import { doneEditing, addConnection } from '../../actions/edit_panel_actions';
-
-import DoneButton from './DoneButton';
-import CancelButton from './CancelButton';
+import { doneEditing, addLink } from '../../actions/edit_panel_actions';
+import { deleteRelatedPins } from '../../actions/lines_actions';
+import { deleteElementFromBoard } from '../../actions/board_actios';
+import { removePath } from '../../helpers/d3helpers';
+import { isObjEmpty } from '../../utils/checkIsEmpty';
 import EditPanelButton from './EditPanelButton';
 
 const EditPanel = ({
     activeElement,
-    onAddConnection,
-    onDoneEditing,
     isEditing,
+    selectedLine,
+    onAddLink,
+    onDoneEditing,
+    onDeleteElementFromBoard,
+    onDeleteRelatedPins,
 }) => {
     const renderMainButtons = () => {
         return (
             <>
-                <AddPinButton
-                    onAddPin={onAddConnection}
-                    name="Add connection"
-                    icon="addPinIcon"
-                />
+                <EditPanelButton handler={onAddLink} name="Add link" />
+                <EditPanelButton handler={() => {}} name="Resize" />
                 <EditPanelButton
-                    handler={() => console.log('Button universal')}
-                    name="Delete connection"
+                    handler={() => {
+                        if (selectedLine) {
+                            onDeleteRelatedPins(selectedLine);
+                        }
+                        onDeleteElementFromBoard(
+                            activeElement.id,
+                            activeElement.list
+                        );
+                        removePath(selectedLine);
+                    }}
+                    name="Delete"
+                    pushRight={true}
                 />
-                <ResizeElementButton name="Resize" icon="resizeIcon" />
-                <DeleteElementButton name="Delete" icon="deleteIcon" />
             </>
         );
     };
-    if (!activeElement) {
-        return <div className={style.panel}>NO selected element</div>;
+    if (isObjEmpty(activeElement)) {
+        return <div className={style.panel} />;
     }
     return (
         <div className={style.panel}>
             {isEditing ? (
                 <div style={{ marginLeft: 'auto' }}>
-                    <DoneButton
-                        onAddPin={onAddConnection}
-                        handler={onDoneEditing}
-                        name="Done"
-                    />
-                    <CancelButton name="Cancel" />
+                    <EditPanelButton handler={onDoneEditing} name="Done" />
+                    <EditPanelButton handler={() => {}} name="Cancel" />
                 </div>
             ) : (
                 renderMainButtons()
@@ -56,16 +58,20 @@ const EditPanel = ({
 
 const mapStateToProps = (state) => {
     return {
-        activeElement: state.picturesBoardData.activeElement,
+        activeElement: state.boardData.activeElement,
         pinMode: state.editPanel.pinMode,
         isEditing: state.editPanel.isEditing,
+        selectedLine: state.lines.selectedLine,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddConnection: (data) => dispatch(addConnection(data)),
+        onAddLink: (data) => dispatch(addLink(data)),
         onDoneEditing: () => dispatch(doneEditing()),
+        onDeleteElementFromBoard: (id, list) =>
+            dispatch(deleteElementFromBoard(id, list)),
+        onDeleteRelatedPins: (lineId) => dispatch(deleteRelatedPins(lineId)),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditPanel);

@@ -1,15 +1,16 @@
 import React from 'react';
 import style from './EditPanel.css';
 
-const EditPanelButton = ({ name, handler }) => {
-    const handleClick = () => {
-        handler();
-    };
+const EditPanelButton = ({ name, handler, pushRight }) => {
     return (
         <button
             type="button"
-            className={style.panelButton}
-            onClick={handleClick}
+            className={
+                pushRight
+                    ? `${style.panelButton} ${style.pushRight}`
+                    : style.panelButton
+            }
+            onClick={handler}
         >
             {name}
         </button>
