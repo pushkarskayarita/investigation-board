@@ -94,7 +94,7 @@ const Draggable = ({
         document.addEventListener('mousemove', sharedHandler);
     };
 
-    // When event is passed from li useEffect works
+    // When event is passed from  menuPanel li item useEffect works
     useEffect(() => {
         onDragStart(startDrag.dragStartPositions, true);
     }, []);

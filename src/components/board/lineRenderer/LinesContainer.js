@@ -15,6 +15,7 @@ import Pin from './Pin';
 import style from './lineRenderer.css';
 import { calcCoordsRelativeToContainer } from '../../../utils/linesUtils';
 import { selectElement } from '../../../actions/board_actios';
+import Draggable from '../../drag/Draggable';
 
 class LinesContainer extends React.Component {
     constructor(props) {
@@ -100,18 +101,23 @@ class LinesContainer extends React.Component {
                 onMouseDown={this.handleMouseDown}
                 onMouseMove={this.handleMouseMove}
                 onMouseUp={this.handleMouseUp}
+                onDragStart={(event) => event.preventDefault()}
                 className={`${style.linesContainer} droppable `}
                 ref={this.pathContainer}
             >
                 <ul>
                     {Object.keys(this.props.linesData.pins).map((pin) => {
                         return (
-                            <Pin
-                                key={pin}
-                                position={this.props.linesData.pins[pin]}
-                                draggablePin={this.props.linesData.draggablePin}
-                                id={pin}
-                            />
+                            <Draggable>
+                                <Pin
+                                    key={pin}
+                                    position={this.props.linesData.pins[pin]}
+                                    draggablePin={
+                                        this.props.linesData.draggablePin
+                                    }
+                                    id={pin}
+                                />
+                            </Draggable>
                         );
                     })}
                 </ul>

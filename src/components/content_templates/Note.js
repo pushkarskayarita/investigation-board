@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Note.css';
 
 function Note() {
+    const [text, setText] = useState('Hello Detective');
     return (
         <div className={`${style.note} ${style.outer} `}>
-            <div className={style.inner}>
-                <p>
-                    80 Columbus Circle <br />
-                    4pm
-                </p>
+            <div
+                onClick={() => setText('Meet me at 7pm at Malcomn')}
+                className={style.inner}
+            >
+                {text}
             </div>
         </div>
     );
