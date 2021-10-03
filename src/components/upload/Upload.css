@@ -28,35 +28,38 @@
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
-    margin: 10px 0px;
+    margin: 10px 0;
     letter-spacing: 0.5px;
-    color:black;
+    color:#FAFAFA;
     /*background-color: #416CA5;*/
 }
 
+.btn:hover{
+    background-color: #004ba0;
+}
+
 .chose {
-    border: 1px solid #416ca5;
-    color:#416ca5;
+    /*border: 3px solid #007CBA;*/
+    background-color:#1976D2;
+    color:#FAFAFA;
     font-family: 'Roboto', sans-serif;
 }
 
-/*button.btn.chose:hover {*/
-
-/*}*/
-
 .upload {
-    background-color: #EEEEEE;
+    background-color: #1976D2;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .active {
-    background-color: #416CA5;
+    background-color: #1976D2;
     color: #FAFAFA;
 }
 
 .deleteBtn {
     width: 70px;
     padding: 5px;
-    background-color: red;
+    background-color: #FF3333;
     z-index: 1000;
     position: absolute;
     top: 0;
@@ -82,4 +85,9 @@
 
 .hide {
     display: none;
+}
+
+.uploadForm span{
+    font-weight: 300;
+    font-size: 14px;
 }

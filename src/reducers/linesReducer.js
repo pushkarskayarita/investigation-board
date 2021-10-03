@@ -4,8 +4,9 @@ import {
     FINISH_DRAW,
     SAVE_PIN,
     UPDATE_PIN_END,
+    UPDATE_PIN_POSITION,
     DELETE_RELATED_PINS,
-    SET_DRAGGABLE_PIN,
+    SET_DRAWING_PIN,
     SAVE_LINE,
 } from '../actions/lines_actions';
 import {
@@ -58,6 +59,15 @@ export default (state = initialState, action) => {
                     [action.payload.id]: action.payload.endCoords,
                 },
             };
+
+        case UPDATE_PIN_POSITION:
+            return {
+                ...state,
+                pins: {
+                    ...state.pins,
+                    [action.payload.id]: action.payload.coords,
+                },
+            };
         case SAVE_PIN:
             return {
                 ...state,
@@ -83,7 +93,7 @@ export default (state = initialState, action) => {
                 pins: updatedPins,
             };
         }
-        case SET_DRAGGABLE_PIN:
+        case SET_DRAWING_PIN:
             return {
                 ...state,
                 draggablePin: action.payload,

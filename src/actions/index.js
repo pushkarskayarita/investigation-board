@@ -15,7 +15,6 @@ export const fetchPictures = (data) => {
 export const uploadPicture = (file) => async (dispatch) => {
     const res = await addPictureDB(file);
     loadedPictures[file.id] = file.file;
-
     dispatch({
         type: UPLOAD_PICTURE,
         payload: res,

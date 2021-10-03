@@ -31,8 +31,8 @@
 
 .pin {
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     background-color: rgb(180, 8, 0);
     background-image: radial-gradient(
@@ -43,7 +43,7 @@
     );
     background-position: 20% 10%;
     cursor: pointer;
-    position: absolute;
+    /*position: absolute;*/
     /*top: -20px;*/
     /*left: 90px;*/
     transform: scale(.8);

@@ -5,7 +5,8 @@ export const SAVE_LINE = 'SAVE_LINE_ID';
 export const SAVE_PIN = 'SAVE_PIN';
 export const DELETE_RELATED_PINS = 'DELETE_RELATED_PINS';
 export const UPDATE_PIN_END = 'UPDATE_PIN_END';
-export const SET_DRAGGABLE_PIN = 'SET_DRAGGABLE_PIN';
+export const UPDATE_PIN_POSITION = 'UPDATE_PIN_POSITION';
+export const SET_DRAWING_PIN = 'SET_DRAWING_PIN';
 export const SELECT_LINE = 'SELECT_LINE';
 export const DELETE_LINE = 'DELETE_ELEMENT_FROM_BOARD';
 
@@ -65,6 +66,16 @@ export const updatePinEnd = (id, endCoords) => {
     };
 };
 
+export const updatePinPosition = (id, coords) => {
+    return {
+        type: UPDATE_PIN_POSITION,
+        payload: {
+            id,
+            coords,
+        },
+    };
+};
+
 export const deleteRelatedPins = (lineId) => {
     return {
         type: DELETE_RELATED_PINS,
@@ -72,9 +83,9 @@ export const deleteRelatedPins = (lineId) => {
     };
 };
 
-export const setDragablePin = (id) => {
+export const setDrawingPin = (id) => {
     return {
-        type: SET_DRAGGABLE_PIN,
+        type: SET_DRAWING_PIN,
         payload: id,
     };
 };

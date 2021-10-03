@@ -13,6 +13,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    color: #FAFAFA;
 }
 
 button {
@@ -51,7 +52,22 @@ button {
     position: relative;
     overflow-y: auto;
     max-width: 320px;
+    background-color: #3C3F41;
 
+}
+
+.menuContainer::-webkit-scrollbar {
+    width: 15px; /* width of the entire scrollbar */
+}
+
+.menuContainer::-webkit-scrollbar-track {
+    background: #3C3F41;; /* color of the tracking area */
+}
+
+.menuContainer::-webkit-scrollbar-thumb {
+    background-color: #7F8388; /* color of the scroll thumb */
+    border-radius: 15px; /* roundness of the scroll thumb */
+    border: 5px solid #3C3F41; /* creates padding around scroll thumb */
 }
 
 .headerContainer {
@@ -60,7 +76,8 @@ button {
     height: 80px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #E0E0E0;
+    border-bottom: 1px solid #4F5152;
+    background: #2D3031;
 }
 
 .boardContainer {
@@ -69,7 +86,7 @@ button {
     top: 0;
     height: calc(100% - 50px);
     justify-content: center;
-    background-color: #EDF0F2;
+    background-color: #23292C;
 }
 
 .boardFrame {
@@ -83,7 +100,7 @@ button {
     background-color: #5b6467;
     background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
     /*background: linear-gradient(#f6b73c, #4d9f0c);*/
-    box-shadow: 0 2px 4px 0 rgb(34 36 38 / 12%), 0 2px 10px 0 rgb(34 36 38 / 15%);
+    box-shadow: 0 2px 4px 0 rgba(34, 36, 38,  0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
     border-radius: 5px;
     padding: 8px;
 }
@@ -94,11 +111,10 @@ button {
     width: 700px;
 }
 
-
 .boardBackground {
     display: flex;
     background: #FF3333;
-    background: url("../images/boardBackgroundWeb.jpg")  no-repeat;
+    background: url("../images/boardBackgroundWebDark.jpg") no-repeat;
     background-size: cover;
     width: 100%;
     max-width: 1080px;

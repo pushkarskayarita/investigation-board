@@ -73,9 +73,6 @@ class LineRenderer extends Component {
                         : { pointerEvents: 'none' }
                 }
                 className={styles.pathContainer}
-                onMouseDown={() => {
-                    // console.log('mouseDOWWNNNNNNN!!!!!');
-                }}
             >
                 <svg
                     key="svgCurve"

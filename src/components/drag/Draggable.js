@@ -100,7 +100,6 @@ const Draggable = ({
     }, []);
 
     const handleMouseDown = (event) => {
-        // console.log('DRAAGGABLE mouse down');
         if (pinMode) {
             // console.log('draggable id', startDrag.id);
         } else {
@@ -154,6 +153,7 @@ const Draggable = ({
                     top: position ? `${position.top}px` : undefined,
                     width: boxWidth,
                     maxWidth: boxWidth,
+                    // border: '4px solid red',
                 }}
                 className={
                     activeElement.id === startDrag.id

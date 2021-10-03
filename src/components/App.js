@@ -40,13 +40,7 @@ const App = (props) => {
                 <div className={style.contentContainer}>
                     <EditPanel />
                     <div className={`${style.boardContainer} droppable`}>
-                        <div
-                            onMouseDown={() => {
-                                // console.log('im here');
-                            }}
-                            className={style.boardFrame}
-                            ref={boardRef}
-                        >
+                        <div className={style.boardFrame} ref={boardRef}>
                             <div className={style.boardBackground} />
                             <LinesContainer>
                                 {templatesBoard.map((item) => {
