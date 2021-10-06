@@ -38,30 +38,33 @@ const MenuPanel = (props) => {
 
     return (
         <div className={style.container}>
-            <ul className={style.templates}>
-                {templates.map((template, index) => {
-                    const Template = template[componentsNames[index]];
-                    return (
-                        <li
-                            draggable={true}
-                            key={template.id}
-                            className={style.templateItem}
-                            onDragStart={(event) => {
-                                event.preventDefault();
-                                handleDragStart(
-                                    event,
-                                    template.id,
-                                    template.imageSrc,
-                                    componentsNames[index],
-                                    'templatesBoard'
-                                );
-                            }}
-                        >
-                            <Template imagePlaceholder={false} />
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className={style.templatesContainer}>
+                <span>Templates</span>
+                <ul className={style.templates}>
+                    {templates.map((template, index) => {
+                        const Template = template[componentsNames[index]];
+                        return (
+                            <li
+                                draggable={true}
+                                key={template.id}
+                                className={style.templateItem}
+                                onDragStart={(event) => {
+                                    event.preventDefault();
+                                    handleDragStart(
+                                        event,
+                                        template.id,
+                                        template.imageSrc,
+                                        componentsNames[index],
+                                        'templatesBoard'
+                                    );
+                                }}
+                            >
+                                <Template imagePlaceholder={false} />
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
             <UploadForm />
             <UploadedPicturesList containerRef={containerRef} />
         </div>

@@ -69,16 +69,12 @@ const App = (props) => {
                                             containerRef={boardRef}
                                             startDrag={item}
                                         >
-                                            <img
-                                                style={{
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    objectFit: 'cover',
-                                                    display: 'block',
-                                                }}
-                                                src={item.imageSrc}
-                                                alt={item.id}
-                                            />
+                                            <div className={style.filtered}>
+                                                <img
+                                                    src={item.imageSrc}
+                                                    alt={item.id}
+                                                />
+                                            </div>
                                         </Draggable>
                                     );
                                 })}

@@ -8,8 +8,8 @@ function PhotoCard({ imagePlaceholder }) {
             <div
                 className={
                     imagePlaceholder
-                        ? `${style.outer} droppable`
-                        : `${style.outer}`
+                        ? `${style.outer} ${style.filtered} droppable`
+                        : `${style.outer} ${style.filtered}`
                 }
             >
                 <img

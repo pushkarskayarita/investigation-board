@@ -49,6 +49,15 @@ module.exports = {
                 specialLink: ['to'],
             },
         ],
+        'jsx-a11y/label-has-associated-control': [
+            2,
+            {
+                labelComponents: ['CustomInputLabel'],
+                labelAttributes: ['label'],
+                controlComponents: ['CustomInput'],
+                depth: 3,
+            },
+        ],
         // 'no-use-before-define': ['error', { variables: false }],
     },
 };

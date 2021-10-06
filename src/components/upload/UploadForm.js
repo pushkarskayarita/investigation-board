@@ -41,7 +41,11 @@ const UploadForm = (props) => {
                     onChange={onChangeHandler}
                     ref={inputEl}
                 />
-                <span>{fileTitle || 'Select file to upload'}</span>
+                <span>
+                    {fileTitle
+                        ? `Image selected: ${fileTitle}`
+                        : 'Select image to upload'}
+                </span>
                 <button
                     type="button"
                     className={`${style.btn} ${style.chose}`}

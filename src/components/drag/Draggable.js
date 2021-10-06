@@ -23,7 +23,6 @@ const Draggable = ({
     onDeleteElementFromBoard,
     onSelectElement,
     boardData,
-    pinMode,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
     const elemRef = useRef();
@@ -100,15 +99,11 @@ const Draggable = ({
     }, []);
 
     const handleMouseDown = (event) => {
-        if (pinMode) {
-            // console.log('draggable id', startDrag.id);
-        } else {
-            const eventValues = {
-                clientX: event.clientX,
-                clientY: event.clientY,
-            };
-            onDragStart(eventValues, false);
-        }
+        const eventValues = {
+            clientX: event.clientX,
+            clientY: event.clientY,
+        };
+        onDragStart(eventValues, false);
     };
 
     const handleMouseMove = (event) => {
@@ -153,7 +148,6 @@ const Draggable = ({
                     top: position ? `${position.top}px` : undefined,
                     width: boxWidth,
                     maxWidth: boxWidth,
-                    // border: '4px solid red',
                 }}
                 className={
                     activeElement.id === startDrag.id
@@ -171,7 +165,6 @@ const Draggable = ({
 
 const mapStateToProps = (state) => {
     return {
-        pictures: state.picturesData.pictures,
         boardData: state.boardData,
         pinMode: state.editPanel.pinMode,
     };

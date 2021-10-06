@@ -49,7 +49,7 @@ function UploadListItem(props) {
     return (
         <li
             ref={uploadIconRef}
-            className={style.card}
+            className={`${style.card} ${style.filtered}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onDragStart={handleDragStart}

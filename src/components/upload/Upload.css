@@ -13,6 +13,7 @@
     flex: 0 0 48%;
     max-width: 48%;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .gallery img {
@@ -24,24 +25,22 @@
 
 .btn {
     cursor: pointer;
-   width:100%;
+    width: 100%;
     padding: 10px;
     font-size: 14px;
     border-radius: 5px;
     margin: 10px 0;
     letter-spacing: 0.5px;
-    color:#FAFAFA;
-    /*background-color: #416CA5;*/
+    color: #FAFAFA;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #004ba0;
 }
 
 .chose {
-    /*border: 3px solid #007CBA;*/
-    background-color:#1976D2;
-    color:#FAFAFA;
+    background-color: #1976D2;
+    color: #FAFAFA;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -69,13 +68,12 @@
 .uploadForm {
     display: flex;
     flex-wrap: wrap;
-    /*justify-content: center;*/
     padding: 20px;
 }
 
 .formTitle {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .uploadForm label, .uploadForm span {
@@ -87,7 +85,27 @@
     display: none;
 }
 
-.uploadForm span{
+.uploadForm span {
     font-weight: 300;
     font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.filtered {
+    border-radius: 5px;
+    background-image: radial-gradient(ellipse, #0000, rgba(0, 0, 0, .3)),
+    linear-gradient(0deg, rgba(153, 119, 34, .25), rgba(153, 119, 34, .25)),
+    url('../../images/noisy-texture-original.png');
+    background-size: auto, auto, auto, cover;
+    background-repeat: repeat;
+    background-position: center;
+    isolation: isolate;
+
+}
+
+.filtered img {
+    filter: blur(.5px) saturate(0.7) brightness(1.2);
+    mix-blend-mode: soft-light;
 }
