@@ -3,12 +3,14 @@
     width: 100%;
     padding: 5% 5% 30%;
     position: relative;
+    border-radius: 3px;
 }
 
 .outer {
     position: relative;
     width: 100%;
     padding-top: 98%; /* defines aspect ratio */
+    user-select: none;
 }
 
 .inner {
@@ -20,7 +22,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none;
+    user-select: none;
 }
 
 .polaroid::before,
@@ -30,7 +32,7 @@
     bottom: 10px;
     width: 40%;
     height: 10px;
-    box-shadow: 0 5px 14px rgba(0,0,0,.99);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.99), 0 10px 28px rgba(0, 0, 0, 0.99);
     z-index: -1;
     transition: all .3s ease-in-out;
 }
@@ -45,11 +47,19 @@
     transform: skew(5deg) rotate(5deg);
 }
 
+.filtered {
+    border-radius: 8px;
+    background-image: radial-gradient(ellipse, #0000, rgba(0, 0, 0, .3)),
+    linear-gradient(0deg, rgba(153, 119, 34, .25), rgba(153, 119, 34, .25)),
+    url('../../images/noisy-texture-original.png');
+    background-size: auto, auto, auto, cover;
+    background-repeat: repeat;
+    background-position: center;
+    isolation: isolate;
+}
 
-
-
-
-
-
-
+.filtered img {
+    filter: blur(.5px) saturate(0.7) brightness(1.2);
+    mix-blend-mode: soft-light;
+}
 

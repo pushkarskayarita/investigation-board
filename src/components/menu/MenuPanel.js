@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import UploadForm from '../upload/UploadForm';
 import style from './MenuPanel.css';
 import UploadedPicturesList from '../upload/UploadedPicturesList';
-import { addElementToBoard } from '../../actions/drag_and_drop_actios';
+import { addElementToBoard } from '../../actions/board_actios';
 import { deletePicture } from '../../actions';
 import { templates, componentsNames } from '../../utils/templates';
 
@@ -38,32 +38,33 @@ const MenuPanel = (props) => {
 
     return (
         <div className={style.container}>
-            <ul className={style.templates}>
-                {templates.map((template, index) => {
-                    const Template = template[componentsNames[index]];
-                    return (
-                        <li
-                            draggable={true}
-                            key={template.id}
-                            className={style.templateItem}
-                            onDragStart={(event) => {
-                                // log(event);
-                                // console.log('Event onstartDrag', event);
-                                event.preventDefault();
-                                handleDragStart(
-                                    event,
-                                    template.id,
-                                    template.imageSrc,
-                                    componentsNames[index],
-                                    'templatesBoard'
-                                );
-                            }}
-                        >
-                            <Template imagePlaceholder={false} />
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className={style.templatesContainer}>
+                <span>Templates</span>
+                <ul className={style.templates}>
+                    {templates.map((template, index) => {
+                        const Template = template[componentsNames[index]];
+                        return (
+                            <li
+                                draggable={true}
+                                key={template.id}
+                                className={style.templateItem}
+                                onDragStart={(event) => {
+                                    event.preventDefault();
+                                    handleDragStart(
+                                        event,
+                                        template.id,
+                                        template.imageSrc,
+                                        componentsNames[index],
+                                        'templatesBoard'
+                                    );
+                                }}
+                            >
+                                <Template imagePlaceholder={false} />
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
             <UploadForm />
             <UploadedPicturesList containerRef={containerRef} />
         </div>

@@ -1,13 +1,14 @@
 import { path } from 'd3-path';
 import { select } from 'd3-selection';
 
-export function removePath(line) {
-    if (line) {
-        line.remove();
+export const lines = {};
+
+export function removePath(lineId) {
+    if (lines[lineId]) {
+        lines[lineId].remove();
+        delete lines[lineId];
     }
 }
-
-export const lines = {};
 
 export function drawLine(
     node,
@@ -15,7 +16,8 @@ export function drawLine(
     originY,
     destinationX,
     destinationY,
-    lineId
+    lineId,
+    callback
 ) {
     const context = path();
     const canvas = select(node);
@@ -30,11 +32,18 @@ export function drawLine(
     lines[lineId] = canvas
         .append('path')
         .attr('class', 'link')
-        .attr('d', context.toString());
+        .attr('d', context.toString())
+        .on('mousedown', () => {
+            callback(lineId, 'lines');
+        });
 
     return lines[lineId];
 }
 
-export function drawPin() {
-    console.log('DRAW PIN  ');
+export function selectLine(lineId) {
+    Object.values(lines).forEach((line) => line.style('stroke', '#f33'));
+    if (lineId) {
+        const selectedLine = lines[lineId];
+        selectedLine.style('stroke', '#6b9cf2');
+    }
 }

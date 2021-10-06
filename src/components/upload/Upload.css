@@ -13,6 +13,7 @@
     flex: 0 0 48%;
     max-width: 48%;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .gallery img {
@@ -22,7 +23,7 @@
     height: auto;
 }
 
-.btn{
+.btn {
     cursor: pointer;
     width: 100%;
     padding: 10px;
@@ -30,25 +31,34 @@
     border-radius: 5px;
     margin: 10px 0;
     letter-spacing: 0.5px;
+    color: #FAFAFA;
+}
+
+.btn:hover {
+    background-color: #004ba0;
 }
 
 .chose {
-    background-color: #EEEEEE;
+    background-color: #1976D2;
+    color: #FAFAFA;
+    font-family: 'Roboto', sans-serif;
 }
 
 .upload {
-    background-color: #EEEEEE;
+    background-color: #1976D2;
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.active{
-    background-color: #416CA5;
+.active {
+    background-color: #1976D2;
     color: #FAFAFA;
 }
 
 .deleteBtn {
     width: 70px;
     padding: 5px;
-    background-color: red;
+    background-color: #FF3333;
     z-index: 1000;
     position: absolute;
     top: 0;
@@ -63,7 +73,7 @@
 
 .formTitle {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .uploadForm label, .uploadForm span {
@@ -73,4 +83,29 @@
 
 .hide {
     display: none;
+}
+
+.uploadForm span {
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.filtered {
+    border-radius: 5px;
+    background-image: radial-gradient(ellipse, #0000, rgba(0, 0, 0, .3)),
+    linear-gradient(0deg, rgba(153, 119, 34, .25), rgba(153, 119, 34, .25)),
+    url('../../images/noisy-texture-original.png');
+    background-size: auto, auto, auto, cover;
+    background-repeat: repeat;
+    background-position: center;
+    isolation: isolate;
+
+}
+
+.filtered img {
+    filter: blur(.5px) saturate(0.7) brightness(1.2);
+    mix-blend-mode: soft-light;
 }

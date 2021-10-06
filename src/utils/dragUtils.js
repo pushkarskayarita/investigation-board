@@ -10,11 +10,9 @@ export const changeImageSrc = (elem, src) => {
 };
 
 export const findIsDroppable = (clientX, clientY, elemRef) => {
-    console.log('ELEM REF');
     const element = elemRef.current;
     element.hidden = true;
     const elemBelow = document.elementFromPoint(clientX, clientY);
-    console.log('ELEM BELLLOW>>>>>>>>>>>>>>>>>>>>>>>>>>', elemBelow);
     element.hidden = false;
     if (!elemBelow) return;
     return elemBelow.closest(`.droppable`);
@@ -34,35 +32,3 @@ export const calculateElementShift = (eventValues, elemRef, initialDrag) => {
     }
     return { shiftX, shiftY };
 };
-
-// const constrainBorders = () => {
-//     const limitTop = -90;
-//     const limitLeft = -330;
-//     const limitRight =
-//         containerRef.current.clientWidth + containerMargin - boxWidth;
-//     const limitBottom =
-//         containerRef.current.clientHeight +
-//         containerMargin -
-//         elemRef.current.offsetHeight;
-//     //654 + 10 - 200 = 464
-//     if (currentTopPosition <= limitTop) {
-//         setPosition({
-//             top: limitTop,
-//         });
-//     }
-//     if (currentLeftPosition <= limitLeft) {
-//         setPosition({
-//             left: limitLeft,
-//         });
-//     }
-//     if (currentLeftPosition > limitRight) {
-//         setPosition({
-//             left: limitRight,
-//         });
-//     }
-//     if (currentTopPosition > limitBottom) {
-//         setPosition({
-//             top: limitBottom,
-//         });
-//     }
-// };

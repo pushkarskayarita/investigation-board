@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
 import picturesReducer from './picturesReducer';
-import picturesBoardReducer from './picturesBoardReducer';
+import boardReducer from './boardReducer';
+import linesReducer from './linesReducer';
+import editPanelReducer from './editPanelReducer';
 
 export default combineReducers({
     picturesData: picturesReducer,
-    picturesBoardData: picturesBoardReducer,
+    boardData: boardReducer,
+    lines: linesReducer,
+    editPanel: editPanelReducer,
 });

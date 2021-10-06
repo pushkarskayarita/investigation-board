@@ -34,8 +34,9 @@ module.exports = {
         'react/jsx-filename-extension': 0,
         'react/jsx-props-no-spreading': 0,
         'react/jsx-one-expression-per-line': 0,
-        'react/jsx-boolean-value': 'always',
+        'react/jsx-boolean-value': 0,
         'react/require-default-props': 0,
+        'react/destructuring-assignment': 0,
         'import/prefer-default-export': 0,
         'import/no-extraneous-dependencies': [
             'error',
@@ -46,6 +47,15 @@ module.exports = {
             {
                 components: ['Link'],
                 specialLink: ['to'],
+            },
+        ],
+        'jsx-a11y/label-has-associated-control': [
+            2,
+            {
+                labelComponents: ['CustomInputLabel'],
+                labelAttributes: ['label'],
+                controlComponents: ['CustomInput'],
+                depth: 3,
             },
         ],
         // 'no-use-before-define': ['error', { variables: false }],

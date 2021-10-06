@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import style from './Upload.css';
 import { deletePicture } from '../../actions';
-import { addElementToBoard } from '../../actions/drag_and_drop_actios';
+import { addElementToBoard } from '../../actions/board_actios';
 
 let counter = 0;
 
@@ -49,8 +49,7 @@ function UploadListItem(props) {
     return (
         <li
             ref={uploadIconRef}
-            className={style.card}
-            key={id}
+            className={`${style.card} ${style.filtered}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onDragStart={handleDragStart}

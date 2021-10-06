@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { deleteElementFromBoard } from '../../actions/drag_and_drop_actios';
+import {
+    deleteElementFromBoard,
+    selectElement,
+} from '../../actions/board_actios';
 import {
     changeImageSrc,
     findIsDroppable,
     calculateElementShift,
 } from '../../utils/dragUtils';
+import style from './Draggable.css';
 
 const boxWidth = 200;
 const containerMargin = 10;
@@ -17,11 +21,12 @@ const Draggable = ({
     startDrag,
     children,
     onDeleteElementFromBoard,
+    onSelectElement,
+    boardData,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
-    // const [isSrcChanged, setIsSrcChanged] = useState(false);
     const elemRef = useRef();
-
+    const { activeElement } = boardData;
     let currentTopPosition;
     let currentLeftPosition;
     let elementShift;
@@ -50,7 +55,7 @@ const Draggable = ({
             containerRef.current.clientHeight +
             containerMargin -
             elemRef.current.offsetHeight;
-        //654 + 10 - 200 = 464
+        // 654 + 10 - 200 = 464
         if (currentTopPosition <= limitTop) {
             setPosition({
                 top: limitTop,
@@ -74,18 +79,21 @@ const Draggable = ({
     };
 
     const onDragStart = (eventValues, initialDrag) => {
+        onSelectElement(startDrag.id, startDrag.list);
         elementShift = calculateElementShift(eventValues, elemRef, initialDrag);
 
         moveAt(eventValues);
         if (sharedHandler) {
             document.removeEventListener('mousemove', sharedHandler);
         }
+        // eslint-disable-next-line no-use-before-define
         sharedHandler = handleMouseMove;
+        // eslint-disable-next-line no-use-before-define
         document.addEventListener('mouseup', handleMouseUp);
         document.addEventListener('mousemove', sharedHandler);
     };
 
-    //When event is passed from li useEffect works
+    // When event is passed from  menuPanel li item useEffect works
     useEffect(() => {
         onDragStart(startDrag.dragStartPositions, true);
     }, []);
@@ -113,7 +121,6 @@ const Draggable = ({
             event.clientY,
             elemRef
         );
-        console.log('DROPPABLE________________', droppable);
         if (droppable) {
             isSrcChanged = changeImageSrc(droppable, startDrag.imageSrc);
             if (isSrcChanged) {
@@ -142,6 +149,11 @@ const Draggable = ({
                     width: boxWidth,
                     maxWidth: boxWidth,
                 }}
+                className={
+                    activeElement.id === startDrag.id
+                        ? `${style.active} boardItem`
+                        : 'boardItem'
+                }
                 onDragStart={(event) => event.preventDefault()}
                 onMouseDown={handleMouseDown}
             >
@@ -153,8 +165,8 @@ const Draggable = ({
 
 const mapStateToProps = (state) => {
     return {
-        pictures: state.picturesData.pictures,
-        picturesBoard: state.picturesBoardData.picturesBoard,
+        boardData: state.boardData,
+        pinMode: state.editPanel.pinMode,
     };
 };
 
@@ -162,6 +174,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteElementFromBoard: (id, list) =>
             dispatch(deleteElementFromBoard(id, list)),
+        onSelectElement: (id, list) => dispatch(selectElement(id, list)),
     };
 };
 

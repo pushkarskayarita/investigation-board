@@ -3,15 +3,13 @@ import style from './PhotoCard.css';
 import image2 from '../../images/Rectangle.jpg';
 
 function PhotoCard({ imagePlaceholder }) {
-    console.log('IMAGE PLASEHOLDER', imagePlaceholder);
     return (
-        // <div className={style.testwraper}>
         <div className={style.polaroid}>
             <div
                 className={
                     imagePlaceholder
-                        ? `${style.outer} droppable`
-                        : `${style.outer}`
+                        ? `${style.outer} ${style.filtered} droppable`
+                        : `${style.outer} ${style.filtered}`
                 }
             >
                 <img
@@ -25,7 +23,6 @@ function PhotoCard({ imagePlaceholder }) {
                 />
             </div>
         </div>
-        // </div>
     );
 }
 
