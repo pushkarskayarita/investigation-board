@@ -1,12 +1,23 @@
 export const changeImageSrc = (elem, src) => {
-    const elemChildren = elem.children;
-    for (let item of elemChildren) {
-        if (item.matches('.imagePlaceholder') && src) {
-            item.src = src;
-            return true;
+    let isSrcChanged = false;
+
+    function findPlaceholder(element, imgSrc) {
+        const childElements = element.children;
+        if (childElements.length > 0) {
+            for (const item of childElements) {
+                if (item.matches('.imagePlaceholder') && src) {
+                    item.src = imgSrc;
+                    isSrcChanged = true;
+                }
+                if (item.children.length > 0) {
+                    findPlaceholder(item, src);
+                }
+            }
         }
     }
-    return false;
+
+    findPlaceholder(elem, src);
+    return isSrcChanged;
 };
 
 export const findIsDroppable = (clientX, clientY, elemRef) => {
@@ -14,7 +25,7 @@ export const findIsDroppable = (clientX, clientY, elemRef) => {
     element.hidden = true;
     const elemBelow = document.elementFromPoint(clientX, clientY);
     element.hidden = false;
-    if (!elemBelow) return;
+    if (!elemBelow) return false;
     return elemBelow.closest(`.droppable`);
 };
 
