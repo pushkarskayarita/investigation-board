@@ -1,0 +1,14 @@
+.filtered {
+    background-image: radial-gradient(ellipse, #0000, rgba(0, 0, 0, .3)),
+    linear-gradient(0deg, rgba(153, 119, 34, .25), rgba(153, 119, 34, .25)),
+    url('../../images/noisy-texture-original.png');
+    background-size: auto, auto, auto, cover;
+    background-repeat: repeat;
+    background-position: center;
+    isolation: isolate;
+}
+
+.filtered img {
+    filter: blur(.5px) saturate(0.7) brightness(1.2);
+    mix-blend-mode: soft-light;
+}

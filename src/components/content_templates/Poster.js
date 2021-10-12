@@ -1,15 +1,22 @@
 import React from 'react';
+import Card from './Сard';
+import poster from '../../images/poster.jpg';
+import style from './Poster.css';
 
-function Poster(props) {
+function Poster({ imagePlaceholder }) {
     return (
         <div
-            style={{
-                background: '#889898',
-                width: '100%',
-                paddingBottom: '100%',
-            }}
+            className={
+                imagePlaceholder
+                    ? `${style.poster} droppable`
+                    : `${style.poster}`
+            }
         >
-            {props.name}
+            <Card
+                imagePlaceholder={imagePlaceholder}
+                src={poster}
+                alt="poster template"
+            />
         </div>
     );
 }
