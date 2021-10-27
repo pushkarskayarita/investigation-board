@@ -1,0 +1,22 @@
+.editableTextarea,.editableTextareaActive {
+    background: transparent;
+    color: #333;
+    width:100%;
+    border: 2px solid transparent;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+}
+
+.editableTextareaActive:hover {
+    background: rgba(107, 156, 242, 0.5);
+    border-color: #6B9CF2;
+    cursor: pointer;
+}
+
+.editableTextareaActive:focus {
+    background: #FAFAFA;
+    color:#212121;
+    cursor: text;
+    border-color: #6B9CF2;
+}

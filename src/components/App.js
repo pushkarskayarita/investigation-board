@@ -55,9 +55,12 @@ const App = (props) => {
                                             key={item.id}
                                             containerRef={boardRef}
                                             startDrag={item}
+                                            wide={elem.wide}
                                         >
                                             <TemplateBoard
                                                 imagePlaceholder={true}
+                                                scaleFactor={0}
+                                                isOnBoard={true}
                                             />
                                         </Draggable>
                                     );

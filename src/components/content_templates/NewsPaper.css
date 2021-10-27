@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css?family=UnifrakturCook:700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background: #999;
+}
+
+.newspaper {
+    position: relative;
+    background: #fff8ed;
+    width: 100%;
+    border-radius: 2px;
+    padding: 2.8% 5% 5%;
+    background: linear-gradient(
+            to bottom,
+            rgba(204, 205, 191, 1) 0%,
+            rgba(226, 222, 210, 1) 20%,
+            rgba(226, 222, 210, 1) 67%,
+            rgba(204, 205, 191, 1) 100%
+    );
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.75);
+    font-size: 14px;
+    color: #212121;
+}
+
+.newspaper h1,h2,h3{
+    margin: 0;
+}
+
+.newspaper textarea{
+    padding-top: 1%;
+    font-family: Impact, "Oswald", sans-serif;
+    font-size: 190%;
+    height: auto;
+    max-height: 100px;
+    padding-bottom: 2%;
+    line-height: 90%;
+    text-transform: uppercase;
+    text-align: justify;
+    font-weight: 900;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    cursor: grab;
+
+}
+
+.header {
+    position: relative;
+    z-index: 1;
+}
+
+.headerBanner {
+    position: relative;
+    max-width: calc(100% - 375px);
+    margin: 0 auto;
+    display: block;
+    height: 35px;
+    text-align: center;
+    color: white;
+    background: #bf5750;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) inset, 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.headerBannerTitle {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: 900;
+    color: #e6e6e6;
+}
+
+.headerBanner::before,
+.headerBanner::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -190px;
+    top: 10px;
+    display: block;
+    width: 200px;
+    height: 0;
+    color: #e6e6e6;
+    border: 17.5px solid #bf5750;
+    border-right: 10px solid #bf5750;
+    border-left-color: transparent;
+}
+
+.headerBanner::after {
+    left: auto;
+    right: -190px;
+    border-left: 10px solid #c65a58;
+    border-right: 15px solid transparent;
+}
+
+.headerBannerLeft,
+.headerBannerRight {
+    position: absolute;
+    top: 10px;
+    left: -160px;
+    font-size: 1rem;
+    height: 40px;
+}
+
+.headerBannerRight {
+    left: auto;
+    right: -160px;
+}
+
+.headerBannerLeft::after,
+.headerBannerRight::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    right: -48px;
+    bottom: 5px;
+    height: 0;
+    width: 0;
+    border-top: 10px solid #a54846;
+    border-left: 37.5px solid transparent;
+}
+
+.headerBannerRight::after {
+    left: -45px;
+    bottom: 5px;
+    border-top: 10px solid #a54846;
+    border-right: 37.5px solid transparent;
+    border-left: none;
+}
+
+.headerTitle {
+    font-family: "UnifrakturCook";
+    font-size: 250%;
+    font-weight: 200;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.newspaperSubheader {
+    margin-bottom: 3%;
+}
+
+.newspaperSubheaderContent {
+    font-size: 35%;
+    padding: 2px 0px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newspaperSubheaderContent span {
+    flex: 1;
+}
+
+.newspaperSubheaderContent span:nth-child(2) {
+    text-align: center;
+}
+
+.newspaperSubheaderContent span:nth-child(3) {
+    text-align: right;
+}
+
+.newspaperTitle {
+    text-transform: uppercase;
+    text-align: justify;
+    font-weight: 900;
+    font-family: Impact, "Oswald", sans-serif;
+    letter-spacing: 1px;
+    line-height: 0.85;
+    color: #333;
+    word-break: break-all;
+    overflow: visible;
+}
+
+.newspaperLine span {
+    -webkit-text-size-adjust: 100%;
+}
+
+.newspaperLine {
+    display: flex;
+    -webkit-text-size-adjust: 100%;
+}
+
+.newspaperLineFirst {
+    font-size: 90px;
+}
+
+.newspaperGrid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.newspaperHeader1 {
+    font-weight: 700;
+    font-size: 80%;
+    /*margin: 4px 0px 8px 0px;*/
+    font-family: Impact, "Oswald", sans-serif;
+    line-height: 110%;
+}
+
+.newspaperHeader2 {
+    font-size: 75%;
+    color: #af3f50;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+    font-family: sans-serif;
+}
+
+.newspaperAuthor {
+    font-weight: 800;
+    font-family: Impact, "Oswald", sans-serif;
+    font-size: 20%;
+}
+
+.newspaperAuthorTitle {
+    font-style: italic;
+    font-size: 30%;
+    margin-bottom:2%;
+}
+
+.newspaperGrid > div:first-child,
+.newspaperGrid > div:last-child {
+    flex: 1 0 19.5%;
+    max-width: 19.5%;
+    box-sizing: content-box;
+}
+
+.newspaperGrid > div:first-child {
+    padding-right: 2.4%;
+}
+
+.newspaperGrid > div:last-child {
+    padding-left: 2.4%;
+}
+
+.newspaperGrid > div:nth-child(2) {
+    flex: 2 0;
+}
+
+.newspaperGrid p {
+    text-align: justify;
+    text-indent: 10px;
+    margin: 0;
+    line-height: 110%;
+    font-size: 35%;
+}
+
+.newspaperGrid blockquote {
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+    font-size: 50%;
+    margin-bottom: 8px;
+}
+
+.newspaperThreecolumn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+
+}
+
+.newspaperThreecolumn > div {
+    flex: 1 0;
+}
+
+.newspaperThreecolumn > div:nth-child(2) {
+    padding: 0 4.1%;
+}
+
+.firstColumnImg {
+    background-image: url(https://d3aya7xwz8momx.cloudfront.net/wp-content/uploads/2018/01/Police-tape.jpg);
+    width: 208px;
+    height: 208px;
+    background-size: cover;
+    background-position-x: -45px;
+    background-repeat: no-repeat;
+    filter: saturate(0.7);
+    margin-top: 8px;
+}
+
+.checkImg {
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.checkImg img{
+    width: 100%;
+}
+
+.mainImage {
+    display: block;
+    margin: auto;
+    width: 100%;
+    overflow: hidden;
+    max-height: 100px;
+}
+
+.mainImage img{
+    width: 100%;
+}
+
+.filtered {
+    border-radius: 3%;
+    background-image: radial-gradient(ellipse, #0000, rgba(0, 0, 0, .3)),
+    linear-gradient(0deg, rgba(153, 119, 34, .25), rgba(153, 119, 34, .25)),
+    url('../../images/noisy-texture-original.png');
+    background-size: auto, auto, auto, cover;
+    background-repeat: repeat;
+    background-position: center;
+    isolation: isolate;
+}
+
+.filtered img {
+    filter: blur(0.5px) saturate(0.7) brightness(1.2) grayscale(1);
+    mix-blend-mode: soft-light;
+}

@@ -12,6 +12,7 @@ import {
 import style from './Draggable.css';
 
 const boxWidth = 200;
+const wideBoxWidth = 370;
 const containerMargin = 10;
 let sharedHandler = null;
 let isSrcChanged = false;
@@ -23,6 +24,7 @@ const Draggable = ({
     onDeleteElementFromBoard,
     onSelectElement,
     boardData,
+    wide,
 }) => {
     const [position, setPosition] = useState({ left: -9999, top: -9999 });
     const elemRef = useRef();
@@ -146,13 +148,13 @@ const Draggable = ({
                     zIndex: 100,
                     left: position ? `${position.left}px` : undefined,
                     top: position ? `${position.top}px` : undefined,
-                    width: boxWidth,
-                    maxWidth: boxWidth,
+                    width: wide ? wideBoxWidth : boxWidth,
+                    maxWidth: wideBoxWidth,
                 }}
                 className={
                     activeElement.id === startDrag.id
-                        ? `${style.active} boardItem`
-                        : 'boardItem'
+                        ? `${style.active} ${style.boardItem}`
+                        : style.boardItem
                 }
                 onDragStart={(event) => event.preventDefault()}
                 onMouseDown={handleMouseDown}
