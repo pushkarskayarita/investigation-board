@@ -59,7 +59,11 @@ const MenuPanel = (props) => {
                                     );
                                 }}
                             >
-                                <Template imagePlaceholder={false} />
+                                <Template
+                                    scaleFactor={template.scaleFactor}
+                                    imagePlaceholder={false}
+                                    isOnBoard={false}
+                                />
                             </li>
                         );
                     })}

@@ -14,6 +14,7 @@
     max-width: 48%;
     overflow: hidden;
     isolation: isolate;
+    cursor: grab;
 }
 
 .gallery img {
@@ -63,6 +64,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
 }
 
 .uploadForm {
@@ -90,7 +92,7 @@
     font-size: 14px;
     letter-spacing: 1px;
     text-align: center;
-    text-decoration: underline;
+    cursor: default;
 }
 
 .filtered {

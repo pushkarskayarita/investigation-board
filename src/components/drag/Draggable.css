@@ -1,3 +1,6 @@
+.boardItem{
+    cursor: move;
+}
 .active {
     outline: 3px solid #6B9CF2;
 }

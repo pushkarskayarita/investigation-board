@@ -6,23 +6,27 @@ import Poster from '../components/content_templates/Poster';
 export const templates = [
     {
         note: Note,
-        imageSrc: null,
+        scaleFactor: 0.8,
         id: 'note',
+        wide: false,
     },
     {
         photoCard: PhotoCard,
-        imageSrc: null,
+        scaleFactor: null,
         id: 'photoCard',
+        wide: false,
     },
     {
         newsPaper: NewsPaper,
-        imageSrc: null,
+        scaleFactor: 0.3,
         id: 'newsPaper',
+        wide: true,
     },
     {
         poster: Poster,
-        imageSrc: null,
+        scaleFactor: null,
         id: 'poster',
+        wide: false,
     },
 ];
 

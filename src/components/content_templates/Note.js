@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+import EditableContainer from '../Editable/EditableContainer';
 import style from './Note.css';
 
-function Note() {
-    const [text, setText] = useState('Meet me at 7pm at Malcolm square');
+const defaultNoteFontSize = 14;
+
+function Note({ isOnBoard, scaleFactor }) {
+    const fontSizeStyle = scaleFactor
+        ? { fontSize: `${defaultNoteFontSize * scaleFactor}px` }
+        : {};
     return (
-        <div className={`${style.note} ${style.outer} `}>
-            <div
-                onClick={() => setText('Hello detective')}
-                className={style.inner}
-            >
-                {text}
+        <div
+            style={fontSizeStyle}
+            className={`${style.note} ${style.outer} ${style.filtered}`}
+        >
+            <div className={style.inner}>
+                <EditableContainer
+                    isOnBoard={isOnBoard}
+                    placeholderText="Meet me at 7pm at Malcolm square"
+                />
             </div>
         </div>
     );

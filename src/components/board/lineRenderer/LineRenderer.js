@@ -29,11 +29,8 @@ class LineRenderer extends Component {
                 }
             )
         ) {
-            // console.log('props changed');
             this.renderLines();
             selectLine(this.props.linesData.selectedLine);
-        } else {
-            // console.log('the same');
         }
     }
 
