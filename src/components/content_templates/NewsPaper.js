@@ -34,10 +34,14 @@ function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard }) {
                 </div>
             </div>
             <div className={style.newspaperTitle}>
-                <EditableContainer
-                    isOnBoard={isOnBoard}
-                    placeholderText="World faces disastrous 2.7C temperature rise"
-                />
+                {isOnBoard ? (
+                    <EditableContainer
+                        isOnBoard={isOnBoard}
+                        placeholderText="World faces disastrous 2.7C temperature rise"
+                    />
+                ) : (
+                    'World faces disastrous 2.7C temperature rise'
+                )}
             </div>
             <div className={style.divider} />
             <div className={style.newspaperGrid}>

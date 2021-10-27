@@ -32,7 +32,7 @@
 .newspaper textarea{
     padding-top: 1%;
     font-family: Impact, "Oswald", sans-serif;
-    font-size: 190%;
+    font-size: 290%;
     height: auto;
     max-height: 100px;
     padding-bottom: 2%;
@@ -171,14 +171,9 @@
 
 .newspaperTitle {
     text-transform: uppercase;
-    text-align: justify;
-    font-weight: 900;
     font-family: Impact, "Oswald", sans-serif;
-    letter-spacing: 1px;
-    line-height: 0.85;
-    color: #333;
-    word-break: break-all;
-    overflow: visible;
+    font-size: 9px;
+    text-align: justify;
 }
 
 .newspaperLine span {
