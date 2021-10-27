@@ -14,10 +14,14 @@ function Note({ isOnBoard, scaleFactor }) {
             className={`${style.note} ${style.outer} ${style.filtered}`}
         >
             <div className={style.inner}>
-                <EditableContainer
-                    isOnBoard={isOnBoard}
-                    placeholderText="Meet me at 7pm at Malcolm square"
-                />
+                {isOnBoard ? (
+                    <EditableContainer
+                        isOnBoard={isOnBoard}
+                        placeholderText="Meet me at 7pm at Malcolm square"
+                    />
+                ) : (
+                    'Meet me at 7pm at Malcolm square'
+                )}
             </div>
         </div>
     );
