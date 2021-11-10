@@ -13,12 +13,20 @@ export const fetchPictures = (data) => {
 };
 
 export const uploadPicture = (file) => async (dispatch) => {
-    const res = await addPictureDB(file);
-    loadedPictures[file.id] = file.file;
-    dispatch({
-        type: UPLOAD_PICTURE,
-        payload: res,
-    });
+    addPictureDB(file)
+        .then(() => {
+            loadedPictures[file.id] = file.file;
+            dispatch({
+                type: UPLOAD_PICTURE,
+                payload: file.id,
+            });
+        })
+        .catch((error) => {
+            console.log(
+                ` ${error} 
+                Error occurred on adding image to indexedDB`
+            );
+        });
 };
 
 export const deletePicture = (id) => async (dispatch) => {

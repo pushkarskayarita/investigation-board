@@ -98,9 +98,9 @@ function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard }) {
                         />
                     </div>
                     <div>
-                        <author className={style.newspaperAuthor}>
+                        <div className={style.newspaperAuthor}>
                             by Chad Light
-                        </author>
+                        </div>
                         <div className={style.newspaperAuthorTitle}>
                             News Staff Writer
                         </div>

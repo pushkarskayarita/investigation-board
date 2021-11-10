@@ -4,7 +4,6 @@ import UploadForm from '../upload/UploadForm';
 import style from './MenuPanel.css';
 import UploadedPicturesList from '../upload/UploadedPicturesList';
 import { addElementToBoard } from '../../actions/board_actios';
-import { deletePicture } from '../../actions';
 import { templates, componentsNames } from '../../utils/templates';
 
 let counter = 0;
@@ -77,9 +76,6 @@ const MenuPanel = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeletePicture: (data) => {
-            dispatch(deletePicture(data));
-        },
         onAddElementToBoard: (data) => dispatch(addElementToBoard(data)),
     };
 };

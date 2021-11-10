@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { loadedPictures } from '../../utils/loaded';
 import style from './Upload.css';
@@ -6,25 +6,15 @@ import UploadListItem from './UploadListItem';
 
 const UploadedPicturesList = (props) => {
     const { pictures } = props;
-    const blobURLS = [];
-
-    // useEffect(() => {
-    //     return () => {
-    //         blobURLS.forEach((url) => {
-    //             URL.revokeObjectURL(url);
-    //         });
-    //     };
-    // }, [pictures]); Why is this needed?????
 
     return (
         <>
             {pictures.length > 0 ? (
-                <ul className={style.gallery}>
+                <ul aria-label="loaded pictures" className={style.gallery}>
                     {pictures.map((id) => {
                         const imageSrc = loadedPictures[id]
                             ? URL.createObjectURL(loadedPictures[id])
                             : '';
-                        // blobURLS.push(imageSrc);
 
                         return loadedPictures[id] ? (
                             <UploadListItem
@@ -36,7 +26,7 @@ const UploadedPicturesList = (props) => {
                     })}
                 </ul>
             ) : (
-                <div style={{ padding: '20px' }}>Choose picture to upload</div>
+                <div>No loaded images</div>
             )}
         </>
     );

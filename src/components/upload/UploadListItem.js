@@ -53,8 +53,9 @@ function UploadListItem(props) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onDragStart={handleDragStart}
+            aria-label="uploaded image"
         >
-            <img alt="" src={imageSrc} />
+            <img alt="loadedImg" src={imageSrc} />
             <span className={isHover ? '' : style.hide}>
                 <button
                     type="button"
