@@ -13,7 +13,7 @@ const UploadForm = (props) => {
         setFileTitle(event.target.files[0].name);
         setFile(event.target.files[0]);
     };
-
+    // ()=>#1
     return (
         <div>
             <form
@@ -41,7 +41,7 @@ const UploadForm = (props) => {
                     onChange={onChangeHandler}
                     ref={inputEl}
                 />
-                <span>
+                <span data-testid="uploadForm">
                     {fileTitle
                         ? `Image selected: ${fileTitle}`
                         : 'Select image to upload'}
