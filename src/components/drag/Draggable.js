@@ -123,7 +123,11 @@ const Draggable = ({
             event.clientY,
             elemRef
         );
-        if (droppable) {
+        const isBoardClass =
+            droppable &&
+            Array.from(droppable.classList).some((el) => el === 'board');
+
+        if (droppable && !isBoardClass) {
             isSrcChanged = changeImageSrc(droppable, startDrag.imageSrc);
             if (isSrcChanged) {
                 onDeleteElementFromBoard(startDrag.id, startDrag.list);
