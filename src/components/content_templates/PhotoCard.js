@@ -1,8 +1,7 @@
 import React from 'react';
 import style from './PhotoCard.css';
-import image2 from '../../images/Rectangle.jpg';
 
-function PhotoCard({ imagePlaceholder }) {
+function PhotoCard({ imagePlaceholder, id, imageSrc }) {
     return (
         <div className={style.polaroid}>
             <div
@@ -13,12 +12,13 @@ function PhotoCard({ imagePlaceholder }) {
                 }
             >
                 <img
+                    data-template={id}
                     className={
                         imagePlaceholder
                             ? `${style.inner} imagePlaceholder`
                             : `${style.inner}`
                     }
-                    src={image2}
+                    src={imageSrc}
                     alt="polaroid"
                 />
             </div>

@@ -11,23 +11,17 @@ import {
     setDrawingPin,
     updatePinPosition,
 } from '../../../actions/lines_actions';
+import { selectElement } from '../../../actions/board_actios';
 import LineRenderer from './LineRenderer';
 import Pin from './Pin';
+import DraggableForPinClass from '../../drag/DraggableForPinClass';
 import style from './lineRenderer.css';
 import { calcCoordsRelativeToContainer } from '../../../utils/linesUtils';
-import { selectElement } from '../../../actions/board_actios';
-import DraggableForPinClass from '../../drag/DraggableForPinClass';
 
 class LinesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.pathContainer = React.createRef();
-    }
-
-    componentDidMount() {
-        this.setState({
-            container: this.pathContainer.current,
-        });
     }
 
     createLineId = (start, end, callback) => {
@@ -40,9 +34,7 @@ class LinesContainer extends React.Component {
     };
 
     handleMouseDown = (event) => {
-        if (this.props.deleteConnection) {
-            return;
-        }
+        if (this.props.deleteConnection) return;
         if (!this.props.pinMode) return;
         const {
             onSetStart,
@@ -55,7 +47,7 @@ class LinesContainer extends React.Component {
         const startPinId = nanoid(8);
         const endPinId = nanoid(8);
         const coords = calcCoordsRelativeToContainer(
-            this.state.container,
+            this.pathContainer.current,
             event.clientX,
             event.clientY
         );
@@ -75,7 +67,7 @@ class LinesContainer extends React.Component {
         if (!linesData.drawing) return;
 
         const coords = calcCoordsRelativeToContainer(
-            this.state.container,
+            this.pathContainer.current,
             event.clientX,
             event.clientY
         );
@@ -89,7 +81,7 @@ class LinesContainer extends React.Component {
         const { endPoint } = this.props.linesData;
         const { onSetEnd, onSetDrawingPin } = this.props;
         const coords = calcCoordsRelativeToContainer(
-            this.state.container,
+            this.pathContainer.current,
             event.clientX,
             event.clientY
         );
@@ -105,7 +97,7 @@ class LinesContainer extends React.Component {
                 onMouseMove={this.handleMouseMove}
                 onMouseUp={this.handleMouseUp}
                 onDragStart={(event) => event.preventDefault()}
-                className={`${style.linesContainer} droppable `}
+                className={`${style.linesContainer} droppable board`}
                 ref={this.pathContainer}
             >
                 <ul>
@@ -114,11 +106,10 @@ class LinesContainer extends React.Component {
                             <DraggableForPinClass
                                 key={pin}
                                 id={pin}
-                                containerRef={this.state.container}
+                                containerRef={this.pathContainer.current}
                                 pinPosition={this.props.linesData.pins[pin]}
                             >
                                 <Pin
-                                    // key={pin}
                                     position={this.props.linesData.pins[pin]}
                                     draggablePin={
                                         this.props.linesData.draggablePin
@@ -129,11 +120,9 @@ class LinesContainer extends React.Component {
                         );
                     })}
                 </ul>
-
                 <LineRenderer
                     linesData={this.props.linesData}
                     pinMode={this.props.pinMode}
-                    onSelectLine={this.props.onSelectLine}
                     onSelectElement={this.props.onSelectElement}
                 />
                 {this.props.children}

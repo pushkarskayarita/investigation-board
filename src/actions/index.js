@@ -22,19 +22,22 @@ export const uploadPicture = (file) => async (dispatch) => {
             });
         })
         .catch((error) => {
-            console.log(
-                ` ${error} 
-                Error occurred on adding image to indexedDB`
-            );
+            console.log(`Error occurred on adding image to indexedDB ${error}`);
         });
 };
 
 export const deletePicture = (id) => async (dispatch) => {
-    await deletePictureDB(id);
-    delete loadedPictures[id];
-
-    dispatch({
-        type: DELETE_PICTURE,
-        payload: id,
-    });
+    deletePictureDB(id)
+        .then(() => {
+            delete loadedPictures[id];
+            dispatch({
+                type: DELETE_PICTURE,
+                payload: id,
+            });
+        })
+        .catch((error) => {
+            console.log(
+                `Error occurred on deleting image from indexedDB  ${error}`
+            );
+        });
 };

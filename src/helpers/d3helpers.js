@@ -36,12 +36,11 @@ export function drawLine(
         .on('mousedown', () => {
             callback(lineId, 'lines');
         });
-
     return lines[lineId];
 }
 
 export function selectLine(lineId) {
-    Object.values(lines).forEach((line) => line.style('stroke', '#f33'));
+    Object.values(lines).forEach((line) => line.style('stroke', '#ff3333'));
     if (lineId) {
         const selectedLine = lines[lineId];
         selectedLine.style('stroke', '#6b9cf2');

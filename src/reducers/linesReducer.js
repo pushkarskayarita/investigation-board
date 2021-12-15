@@ -10,11 +10,12 @@ import {
     SAVE_LINE,
 } from '../actions/lines_actions';
 import {
-    DELETE_ELEMENT_FROM_BOARD,
+    FETCH_BOARD_DATA_FROM_DB,
     SELECT_ELEMENT,
 } from '../actions/board_actios';
 
 const initialState = {
+    id: 1,
     startPoint: null,
     endPoint: null,
     draggablePin: null,
@@ -22,7 +23,6 @@ const initialState = {
     pins: {},
     linesKeysMap: {},
     selectedLine: null,
-    // selectedPins: [],
 };
 
 export default (state = initialState, action) => {
@@ -77,20 +77,26 @@ export default (state = initialState, action) => {
                 },
             };
         case DELETE_RELATED_PINS: {
-            const filteresIds = Object.keys(state.pins).filter((pin) => {
+            const filteredIds = Object.keys(state.pins).filter((pin) => {
                 return (
                     pin === state.linesKeysMap[action.payload].start ||
                     pin === state.linesKeysMap[action.payload].end
                 );
             });
             const {
-                [filteresIds[0]]: foo,
-                [filteresIds[1]]: bar,
+                [filteredIds[0]]: foo,
+                [filteredIds[1]]: bar,
                 ...updatedPins
             } = state.pins;
+
+            const id = state.selectedLine;
+            const { [id]: any, ...updatedLinesKeysMap } = state.linesKeysMap;
+
             return {
                 ...state,
                 pins: updatedPins,
+                linesKeysMap: updatedLinesKeysMap,
+                selectedLine: null,
             };
         }
         case SET_DRAWING_PIN:
@@ -109,18 +115,18 @@ export default (state = initialState, action) => {
                 ...state,
                 selectedLine: null,
             };
-        case DELETE_ELEMENT_FROM_BOARD: {
-            const id = state.selectedLine;
-            const {
-                [id]: anyshit,
-                ...updatedLinesKeysMap
-            } = state.linesKeysMap;
+
+        case FETCH_BOARD_DATA_FROM_DB: {
+            if (action.payload.lines.length > 0) {
+                return {
+                    ...action.payload.lines[0],
+                };
+            }
             return {
                 ...state,
-                linesKeysMap: updatedLinesKeysMap,
-                selectedLine: null,
             };
         }
+
         default:
             return state;
     }

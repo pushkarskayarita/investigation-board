@@ -1,22 +1,22 @@
+/* eslint-disable indent */
 import React from 'react';
 import EditableContainer from '../Editable/EditableContainer';
-import imagePlantPipe from '../../images/plantPipe.jpg';
 import imageSign from '../../images/sign.jpg';
 import imageShip from '../../images/ship.jpg';
 import style from './NewsPaper.css';
 
 const defaultNewsPaperFontSize = 14;
 
-function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard }) {
+function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard, id, imageSrc }) {
     return (
         <div
             style={
                 scaleFactor
                     ? {
-                        fontSize: `${
-                            scaleFactor * defaultNewsPaperFontSize
-                        }px`,
-                    }
+                          fontSize: `${
+                              scaleFactor * defaultNewsPaperFontSize
+                          }px`,
+                      }
                     : {}
             }
             className={style.newspaper}
@@ -90,10 +90,11 @@ function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard }) {
                         className={`${style.mainImage} ${style.filtered}  droppable`}
                     >
                         <img
+                            data-template={id}
                             className={
                                 imagePlaceholder ? 'imagePlaceholder' : ''
                             }
-                            src={imagePlantPipe}
+                            src={imageSrc}
                             alt=""
                         />
                     </div>
@@ -221,9 +222,11 @@ function NewsPaper({ imagePlaceholder, scaleFactor, isOnBoard }) {
                     </p>
                     <p>
                         In a panic, Scott released an apology video that was
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         posted online. In it, Scott states that "it wasn't me
                         (referencing who put the watermark on the paper). They
-                        are trying to make me an escape goat."The emissions gap
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                        are trying to make me an escape goat. "The emissions gap
                         report also highlighted methane, a powerful greenhouse
                         gas that arises from animal husbandry, natural gas
                         extraction and waste. The US, the EU and more than 20

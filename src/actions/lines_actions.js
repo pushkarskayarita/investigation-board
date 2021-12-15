@@ -1,3 +1,5 @@
+import { modifyCollectionDB } from '../helpers/indexedDB';
+
 export const SET_START = 'SET_START';
 export const SET_END = 'SET_END';
 export const FINISH_DRAW = 'FINISH_DRAW';
@@ -76,11 +78,13 @@ export const updatePinPosition = (id, coords) => {
     };
 };
 
-export const deleteRelatedPins = (lineId) => {
-    return {
-        type: DELETE_RELATED_PINS,
-        payload: lineId,
-    };
+export const deleteRelatedPins = (lineId, lines) => async (dispatch) => {
+    modifyCollectionDB(lines, lineId).then(() => {
+        dispatch({
+            type: DELETE_RELATED_PINS,
+            payload: lineId,
+        });
+    });
 };
 
 export const setDrawingPin = (id) => {

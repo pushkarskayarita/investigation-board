@@ -1,9 +1,8 @@
 import React from 'react';
 import Card from './Сard';
-import poster from '../../images/poster.jpg';
 import style from './Poster.css';
 
-function Poster({ imagePlaceholder }) {
+function Poster({ imagePlaceholder, id, imageSrc }) {
     return (
         <div
             className={
@@ -14,8 +13,9 @@ function Poster({ imagePlaceholder }) {
         >
             <Card
                 imagePlaceholder={imagePlaceholder}
-                src={poster}
+                src={imageSrc}
                 alt="poster template"
+                id={id}
             />
         </div>
     );

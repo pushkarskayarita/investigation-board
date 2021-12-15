@@ -1,12 +1,18 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { initiateDB, getPicturesDB } from '../helpers/indexedDB';
+import {
+    getLinesDB,
+    getPicturesBoard,
+    getPicturesDB,
+    getTemplatesBoard,
+} from '../helpers/indexedDB';
 import { loadedPictures } from '../utils/loaded';
 import MenuPanel from './menu/MenuPanel';
 import Header from './header/Header';
 import Draggable from './drag/Draggable';
 import style from './App.css';
 import { fetchPictures } from '../actions';
+import { fetchBoardDataFromDB } from '../actions/board_actios';
 import { templates } from '../utils/templates';
 import LinesContainer from './board/lineRenderer/LinesContainer';
 import EditPanel from './EditPanel/EditPanel';
@@ -14,7 +20,6 @@ import EditPanel from './EditPanel/EditPanel';
 const App = (props) => {
     const { picturesBoard, templatesBoard } = props.boardData;
     useEffect(() => {
-        initiateDB();
         getPicturesDB().then((pictures) => {
             const picturesIds = [];
             pictures.forEach((picture) => {
@@ -22,6 +27,13 @@ const App = (props) => {
                 picturesIds.push(picture.id);
             });
             props.onFetchPictures(picturesIds);
+        });
+        Promise.all([
+            getPicturesBoard(),
+            getTemplatesBoard(),
+            getLinesDB(),
+        ]).then((data) => {
+            props.onFetchBoardDataFromDb(data);
         });
     }, []);
 
@@ -39,7 +51,7 @@ const App = (props) => {
                 </div>
                 <div className={style.contentContainer}>
                     <EditPanel />
-                    <div className={`${style.boardContainer} droppable`}>
+                    <div className={`${style.boardContainer} droppable board`}>
                         <div className={style.boardFrame} ref={boardRef}>
                             <div className={style.boardBackground} />
                             <LinesContainer>
@@ -56,11 +68,14 @@ const App = (props) => {
                                             containerRef={boardRef}
                                             startDrag={item}
                                             wide={elem.wide}
+                                            initialDrag={false}
                                         >
                                             <TemplateBoard
                                                 imagePlaceholder={true}
                                                 scaleFactor={0}
                                                 isOnBoard={true}
+                                                id={item.id}
+                                                imageSrc={item.imageSrc}
                                             />
                                         </Draggable>
                                     );
@@ -100,6 +115,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onFetchPictures: (data) => dispatch(fetchPictures(data)),
+        onFetchBoardDataFromDb: (data) => dispatch(fetchBoardDataFromDB(data)),
     };
 };
 

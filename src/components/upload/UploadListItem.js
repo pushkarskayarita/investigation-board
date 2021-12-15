@@ -1,21 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-
+import { nanoid } from 'nanoid';
 import style from './Upload.css';
 import { deletePicture } from '../../actions';
 import { addElementToBoard } from '../../actions/board_actios';
 
-let counter = 0;
-
 function UploadListItem(props) {
     const { id, imageSrc } = props;
-
     const [isHover, setIsHover] = useState(false);
     const uploadIconRef = useRef();
-
-    const incrementCounter = () => {
-        counter += 1;
-    };
     const handleMouseEnter = () => {
         setIsHover(true);
     };
@@ -23,17 +16,12 @@ function UploadListItem(props) {
     const handleMouseLeave = () => {
         setIsHover(false);
     };
-    const createPictureBoardId = (listItemId) => {
-        return listItemId + counter;
-    };
 
     const handleDragStart = (event) => {
         event.preventDefault();
-        incrementCounter();
-        const pictureBoardId = createPictureBoardId(id);
         const coords = event.target.getBoundingClientRect();
         props.onAddElementToBoard({
-            id: pictureBoardId,
+            id: nanoid(8),
             dragStartPositions: {
                 top: coords.top,
                 left: coords.left,
@@ -43,6 +31,8 @@ function UploadListItem(props) {
             imageSrc,
             elementName: 'img',
             list: 'picturesBoard',
+            coords: {},
+            loadedPictureFileId: id,
         });
     };
 

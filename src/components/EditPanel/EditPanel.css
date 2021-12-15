@@ -12,8 +12,6 @@
     background-color: #3C3F41;
 }
 
-
-
 .panelButton{
     color:#EDF0F2;
     cursor: pointer;
@@ -21,10 +19,6 @@
     margin-right: 10px;
     border-radius: 5px;
 }
-
-/*.panelButton:hover{*/
-/*    background-color: #007CBA;*/
-/*}*/
 
 .panelButton:hover{
     background-color: rgba(250, 250, 250, 0.07);;

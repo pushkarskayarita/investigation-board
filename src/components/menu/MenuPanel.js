@@ -1,28 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { nanoid } from 'nanoid';
 import UploadForm from '../upload/UploadForm';
 import style from './MenuPanel.css';
 import UploadedPicturesList from '../upload/UploadedPicturesList';
 import { addElementToBoard } from '../../actions/board_actios';
 import { templates, componentsNames } from '../../utils/templates';
 
-let counter = 0;
 const MenuPanel = (props) => {
     const { containerRef } = props.containerRef;
-    const incrementCounter = () => {
-        counter += 1;
-    };
-    const createPictureBoardId = (listItemId) => {
-        return listItemId + counter;
-    };
     const handleDragStart = (event, id, imageSrc, elementName, list) => {
-        incrementCounter();
-        const pictureBoardId = createPictureBoardId(id);
-
         const coords = event.target.getBoundingClientRect();
-
         props.onAddElementToBoard({
-            id: pictureBoardId,
+            id: nanoid(8),
             dragStartPositions: {
                 top: coords.top,
                 left: coords.left,
@@ -32,6 +22,8 @@ const MenuPanel = (props) => {
             imageSrc,
             elementName,
             list,
+            coords: {},
+            loadedPictureFileId: '',
         });
     };
 
@@ -62,6 +54,7 @@ const MenuPanel = (props) => {
                                     scaleFactor={template.scaleFactor}
                                     imagePlaceholder={false}
                                     isOnBoard={false}
+                                    imageSrc={template.imageSrc}
                                 />
                             </li>
                         );

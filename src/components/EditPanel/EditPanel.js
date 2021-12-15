@@ -9,6 +9,7 @@ import { isObjEmpty } from '../../utils/checkIsEmpty';
 import EditPanelButton from './EditPanelButton';
 
 const EditPanel = ({
+    lines,
     activeElement,
     isEditing,
     selectedLine,
@@ -25,13 +26,14 @@ const EditPanel = ({
                 <EditPanelButton
                     handler={() => {
                         if (selectedLine) {
-                            onDeleteRelatedPins(selectedLine);
+                            onDeleteRelatedPins(selectedLine, lines);
+                            removePath(selectedLine);
+                            return;
                         }
                         onDeleteElementFromBoard(
                             activeElement.id,
                             activeElement.list
                         );
-                        removePath(selectedLine);
                     }}
                     name="Delete"
                     pushRight={true}
@@ -62,6 +64,7 @@ const mapStateToProps = (state) => {
         pinMode: state.editPanel.pinMode,
         isEditing: state.editPanel.isEditing,
         selectedLine: state.lines.selectedLine,
+        lines: state.lines,
     };
 };
 
@@ -71,7 +74,8 @@ const mapDispatchToProps = (dispatch) => {
         onDoneEditing: () => dispatch(doneEditing()),
         onDeleteElementFromBoard: (id, list) =>
             dispatch(deleteElementFromBoard(id, list)),
-        onDeleteRelatedPins: (lineId) => dispatch(deleteRelatedPins(lineId)),
+        onDeleteRelatedPins: (lineId, lines) =>
+            dispatch(deleteRelatedPins(lineId, lines)),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditPanel);

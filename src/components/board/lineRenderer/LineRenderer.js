@@ -6,28 +6,15 @@ class LineRenderer extends Component {
     constructor(props) {
         super(props);
         this.pathContainer = React.createRef();
-        this.state = {
-            container: null,
-        };
-    }
-
-    componentDidMount() {
-        this.setState({
-            container: this.pathContainer.current,
-        });
     }
 
     componentDidUpdate(prevProps) {
         if (
-            this.props.linesData !== prevProps.linesData ||
-            Object.keys(prevProps.linesData.linesKeysMap).every(
-                (lineKey, i) => {
-                    return (
-                        lineKey !==
-                        Object.keys(this.props.linesData.linesKeysMap)[i]
-                    );
-                }
-            )
+            this.props.linesData.linesKeysMap !==
+                prevProps.linesData.linesKeysMap ||
+            this.props.linesData.pins !== prevProps.linesData.pins ||
+            this.props.linesData.selectedLine !==
+                prevProps.linesData.selectedLine
         ) {
             this.renderLines();
             selectLine(this.props.linesData.selectedLine);
@@ -37,35 +24,37 @@ class LineRenderer extends Component {
     renderLines = () => {
         const { linesKeysMap, pins } = this.props.linesData;
         const { onSelectElement } = this.props;
-        // should remove previous before render new!
-        Object.entries(linesKeysMap).forEach(([id, line]) => {
-            removePath(line, id);
-        });
+        const linesKeys = Object.keys(linesKeysMap);
 
-        Object.keys(linesKeysMap).forEach((line) => {
-            const originX = pins[linesKeysMap[line].start].x;
-            const originY = pins[linesKeysMap[line].start].y;
-            const destinationX = pins[linesKeysMap[line].end].x;
-            const destinationY = pins[linesKeysMap[line].end].y;
+        if (linesKeys.length > 0) {
+            linesKeys.forEach((id) => {
+                removePath(id);
+            });
 
-            drawLine(
-                this.state.container,
-                originX,
-                originY,
-                destinationX,
-                destinationY,
-                line,
-                onSelectElement
-            );
-        });
+            linesKeys.forEach((line) => {
+                const originX = pins[linesKeysMap[line].start].x;
+                const originY = pins[linesKeysMap[line].start].y;
+                const destinationX = pins[linesKeysMap[line].end].x;
+                const destinationY = pins[linesKeysMap[line].end].y;
+                drawLine(
+                    this.pathContainer.current,
+                    originX,
+                    originY,
+                    destinationX,
+                    destinationY,
+                    line,
+                    onSelectElement
+                );
+            });
+        }
     };
 
     render() {
-        const { pinMode, deleteConnection } = this.props;
+        const { pinMode } = this.props;
         return (
             <div
                 style={
-                    pinMode || deleteConnection
+                    pinMode
                         ? { pointerEvents: 'auto' }
                         : { pointerEvents: 'none' }
                 }

@@ -1,5 +1,6 @@
 export const changeImageSrc = (elem, src) => {
     let isSrcChanged = false;
+    let templateId = '';
 
     function findPlaceholder(element, imgSrc) {
         const childElements = element.children;
@@ -7,6 +8,7 @@ export const changeImageSrc = (elem, src) => {
             for (const item of childElements) {
                 if (item.matches('.imagePlaceholder') && src) {
                     item.src = imgSrc;
+                    templateId = item.dataset.template;
                     isSrcChanged = true;
                 }
                 if (item.children.length > 0) {
@@ -17,7 +19,7 @@ export const changeImageSrc = (elem, src) => {
     }
 
     findPlaceholder(elem, src);
-    return isSrcChanged;
+    return { isSrcChanged, templateId };
 };
 
 export const findIsDroppable = (clientX, clientY, elemRef) => {

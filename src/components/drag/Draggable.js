@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {
     deleteElementFromBoard,
     selectElement,
+    saveElementCoords,
+    changeTemplateImgSrc,
 } from '../../actions/board_actios';
 import {
     changeImageSrc,
@@ -15,7 +17,6 @@ const boxWidth = 200;
 const wideBoxWidth = 370;
 const containerMargin = 10;
 let sharedHandler = null;
-let isSrcChanged = false;
 
 const Draggable = ({
     containerRef,
@@ -23,10 +24,16 @@ const Draggable = ({
     children,
     onDeleteElementFromBoard,
     onSelectElement,
+    onSaveElementCoords,
+    onChangeTemplateImgSrc,
     boardData,
     wide,
 }) => {
-    const [position, setPosition] = useState({ left: -9999, top: -9999 });
+    const initialPositions = Object.values(startDrag.coords).length
+        ? startDrag.coords
+        : { left: -9999, top: -9999 };
+
+    const [position, setPosition] = useState(initialPositions);
     const elemRef = useRef();
     const { activeElement } = boardData;
     let currentTopPosition;
@@ -57,7 +64,6 @@ const Draggable = ({
             containerRef.current.clientHeight +
             containerMargin -
             elemRef.current.offsetHeight;
-        // 654 + 10 - 200 = 464
         if (currentTopPosition <= limitTop) {
             setPosition({
                 top: limitTop,
@@ -97,8 +103,15 @@ const Draggable = ({
 
     // When event is passed from  menuPanel li item useEffect works
     useEffect(() => {
-        onDragStart(startDrag.dragStartPositions, true);
+        if (boardData.initialDrag) {
+            onDragStart(startDrag.dragStartPositions, true);
+        }
     }, []);
+
+    useEffect(() => {
+        const { id, list } = startDrag;
+        onSaveElementCoords(id, list, position);
+    }, [position]);
 
     const handleMouseDown = (event) => {
         const eventValues = {
@@ -118,6 +131,7 @@ const Draggable = ({
     };
 
     const handleMouseUp = (event) => {
+        const { list } = startDrag;
         const droppable = findIsDroppable(
             event.clientX,
             event.clientY,
@@ -127,9 +141,21 @@ const Draggable = ({
             droppable &&
             Array.from(droppable.classList).some((el) => el === 'board');
 
-        if (droppable && !isBoardClass) {
-            isSrcChanged = changeImageSrc(droppable, startDrag.imageSrc);
+        if (droppable && !isBoardClass && startDrag.elementName === 'img') {
+            const { isSrcChanged, templateId } = changeImageSrc(
+                droppable,
+                startDrag.imageSrc
+            );
+
             if (isSrcChanged) {
+                setTimeout(() => {
+                    onChangeTemplateImgSrc(
+                        templateId,
+                        list,
+                        startDrag.imageSrc,
+                        startDrag.loadedPictureFileId
+                    );
+                }, 0);
                 onDeleteElementFromBoard(startDrag.id, startDrag.list);
             }
         }
@@ -181,6 +207,22 @@ const mapDispatchToProps = (dispatch) => {
         onDeleteElementFromBoard: (id, list) =>
             dispatch(deleteElementFromBoard(id, list)),
         onSelectElement: (id, list) => dispatch(selectElement(id, list)),
+        onSaveElementCoords: (id, list, coords) =>
+            dispatch(saveElementCoords(id, list, coords)),
+        onChangeTemplateImgSrc: (
+            idOfTemplate,
+            list,
+            imageSrc,
+            loadedPictureFileId
+        ) =>
+            dispatch(
+                changeTemplateImgSrc(
+                    idOfTemplate,
+                    list,
+                    imageSrc,
+                    loadedPictureFileId
+                )
+            ),
     };
 };
 

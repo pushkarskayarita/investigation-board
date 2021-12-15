@@ -114,7 +114,7 @@ button {
 .boardBackground {
     display: flex;
     background: #FF3333;
-    background: url("../images/boardBackgroundWebDark.jpg") no-repeat;
+    background: url("../images/boardBackgroundWeb.jpg") no-repeat;
     background-size: cover;
     width: 100%;
     max-width: 1080px;
