@@ -46,3 +46,8 @@ export function selectLine(lineId) {
         selectedLine.style('stroke', '#6b9cf2');
     }
 }
+
+export function clearCanvas() {
+    const svg = select('svg');
+    svg.selectAll('*').remove();
+}

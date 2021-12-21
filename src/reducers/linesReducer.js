@@ -12,6 +12,7 @@ import {
 import {
     FETCH_BOARD_DATA_FROM_DB,
     SELECT_ELEMENT,
+    CLEAR_BOARD,
 } from '../actions/board_actios';
 
 const initialState = {
@@ -126,7 +127,9 @@ export default (state = initialState, action) => {
                 ...state,
             };
         }
-
+        case CLEAR_BOARD: {
+            return initialState;
+        }
         default:
             return state;
     }

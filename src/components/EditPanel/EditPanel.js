@@ -22,7 +22,6 @@ const EditPanel = ({
         return (
             <>
                 <EditPanelButton handler={onAddLink} name="Add link" />
-                <EditPanelButton handler={() => {}} name="Resize" />
                 <EditPanelButton
                     handler={() => {
                         if (selectedLine) {

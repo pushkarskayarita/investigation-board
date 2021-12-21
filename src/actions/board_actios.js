@@ -7,6 +7,7 @@ import {
     deleteBoardItemDB,
     getLinesDB,
     modifyCollectionDB,
+    clearDB,
     mapGetDB,
 } from '../helpers/indexedDB';
 
@@ -18,6 +19,7 @@ export const SAVE_ELEMENT_COORDS = 'SAVE_ELEMENT_COORDS';
 export const CHANGE_IMAGE_SRC = 'CHANGE_IMAGE_SRC';
 export const FETCH_BOARD_DATA_FROM_DB = 'FETCH_BOARD_DATA_FROM_DB';
 export const FETCH_LINES_FROM_LOCAL_STORAGE = 'FETCH_LINES_FROM_LOCAL_STORAGE';
+export const CLEAR_BOARD = 'CLEAR_BOARD';
 
 export const fetchBoardDataFromDB = (data) => async (dispatch) => {
     dispatch({
@@ -113,4 +115,16 @@ export const changeTemplateImgSrc = (
             loadedPictureFileId,
         },
     };
+};
+
+export const clearBoard = () => async (dispatch) => {
+    clearDB()
+        .then(() => {
+            dispatch({
+                type: CLEAR_BOARD,
+            });
+        })
+        .catch((err) =>
+            console.log(`Error occurred on clear board click ${err}`)
+        );
 };

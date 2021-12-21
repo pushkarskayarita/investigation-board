@@ -7,6 +7,7 @@ import {
     CHANGE_IMAGE_SRC,
     SAVE_BOARD,
     FETCH_LINES_FROM_LOCAL_STORAGE,
+    CLEAR_BOARD,
 } from '../actions/board_actios';
 import { loadedPictures } from '../utils/loaded';
 import mapStateToProps from 'react-redux/lib/connect/mapStateToProps';
@@ -22,6 +23,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_BOARD_DATA_FROM_DB: {
             const { picturesBoard, templatesBoard, lines } = action.payload;
+
             function matchPicturesSrc(arr, loadedFiles) {
                 const loadedPicturesIds = Object.keys(loadedFiles);
                 const boardItems = arr.map((el) => {
@@ -112,6 +114,10 @@ export default (state = initialState, action) => {
                         : item;
                 }),
             };
+        }
+
+        case CLEAR_BOARD: {
+            return initialState;
         }
 
         default:

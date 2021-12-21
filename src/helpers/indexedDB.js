@@ -11,9 +11,9 @@ db.version(1).stores({
     linesObjState: 'id',
 });
 
-db.on('ready', function () {
+db.on('ready', () => {
     // eslint-disable-next-line consistent-return
-    return db.pictures.count(function (count) {
+    return db.pictures.count((count) => {
         if (count > 0) {
             console.log('Already populated');
         } else {
@@ -45,7 +45,7 @@ db.on('ready', function () {
     });
 });
 
-db.on('populate', function () {
+db.on('populate', () => {
     db.templatesBoard.bulkAdd(intialBoardData.templates);
     db.linesObjState.add(intialBoardData.lines);
     db.picturesBoard.bulkAdd(intialBoardData.pictures);
@@ -133,6 +133,15 @@ export const deletePictureDB = (id) => {
     return db.pictures.delete(id);
 };
 
-export const deleteDB = () => {
-    return db.delete();
+const clearTableDB = (table) => {
+    return db[table].clear();
+};
+
+export const clearDB = () => {
+    return Promise.all([
+        clearTableDB('pictures'),
+        clearTableDB('templatesBoard'),
+        clearTableDB('picturesBoard'),
+        clearTableDB('linesObjState'),
+    ]);
 };
