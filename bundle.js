@@ -21258,7 +21258,10 @@ setDebug(debug, dexieStackFrameFilter);
 
 
 var loadedImagesUrls = new Map([['QdO4Ss6o', bill], ['V3_AeZxH', news], ['fo7mVkrM', vaccine], ['xRdg8h1y', tower], ['zRWeDkrH', protest3]]);
+// CONCATENATED MODULE: ./src/images/poster.jpg
+/* harmony default export */ var poster = (__webpack_require__.p + "/images/poster.jpg");
 // CONCATENATED MODULE: ./src/utils/initialBoardData.js
+
 var intialBoardData = {
   templates: [{
     id: '7ztRPD_1',
@@ -21268,7 +21271,7 @@ var intialBoardData = {
       clientX: 224,
       clientY: 213
     },
-    imageSrc: 'http://localhost:8080/images/poster.jpg',
+    imageSrc: poster,
     elementName: 'poster',
     list: 'templatesBoard',
     coords: {
@@ -22458,8 +22461,6 @@ function Poster_Poster(_ref) {
 }
 
 /* harmony default export */ var content_templates_Poster = (Poster_Poster);
-// CONCATENATED MODULE: ./src/images/poster.jpg
-/* harmony default export */ var poster = (__webpack_require__.p + "/images/poster.jpg");
 // CONCATENATED MODULE: ./src/images/plantPipe.jpg
 /* harmony default export */ var plantPipe = (__webpack_require__.p + "/images/plantPipe.jpg");
 // CONCATENATED MODULE: ./src/images/gates.jpg
