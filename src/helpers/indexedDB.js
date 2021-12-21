@@ -1,4 +1,6 @@
 import Dexie from 'dexie';
+import { loadedImagesUrls } from '../utils/loadedDB';
+import { intialBoardData } from '../utils/initialBoardData';
 
 const db = new Dexie('ReactDexie');
 
@@ -7,6 +9,46 @@ db.version(1).stores({
     templatesBoard: 'id,coords,elementName,list',
     picturesBoard: 'id,coords,elementName,list',
     linesObjState: 'id',
+});
+
+db.on('ready', function () {
+    // eslint-disable-next-line consistent-return
+    return db.pictures.count(function (count) {
+        if (count > 0) {
+            console.log('Already populated');
+        } else {
+            console.log('Database is empty. Populating from ajax call...');
+
+            return Promise.all(
+                Array.from(loadedImagesUrls.values()).map((url) => fetch(url))
+            )
+                .then((responses) => {
+                    return Promise.all(
+                        responses.map((res) => {
+                            return res.blob();
+                        })
+                    );
+                })
+                .then((data) => {
+                    const loadedImagesIds = Array.from(loadedImagesUrls.keys());
+                    return data.map((blob, index) => {
+                        return db.pictures.bulkAdd([
+                            {
+                                id: loadedImagesIds[index],
+                                title: 'testImage',
+                                file: new File([blob], 'ooo'),
+                            },
+                        ]);
+                    });
+                });
+        }
+    });
+});
+
+db.on('populate', function () {
+    db.templatesBoard.bulkAdd(intialBoardData.templates);
+    db.linesObjState.add(intialBoardData.lines);
+    db.picturesBoard.bulkAdd(intialBoardData.pictures);
 });
 
 export const getPicturesDB = () => {

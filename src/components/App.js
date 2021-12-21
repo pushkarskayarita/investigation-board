@@ -20,21 +20,25 @@ import EditPanel from './EditPanel/EditPanel';
 const App = (props) => {
     const { picturesBoard, templatesBoard } = props.boardData;
     useEffect(() => {
-        getPicturesDB().then((pictures) => {
-            const picturesIds = [];
-            pictures.forEach((picture) => {
-                loadedPictures[picture.id] = picture.file;
-                picturesIds.push(picture.id);
+        getPicturesDB()
+            .then((pictures) => {
+                const picturesIds = [];
+                pictures.forEach((picture) => {
+                    loadedPictures[picture.id] = picture.file;
+                    picturesIds.push(picture.id);
+                });
+                props.onFetchPictures(picturesIds);
+            })
+            .then(() => {
+                return Promise.all([
+                    getPicturesBoard(),
+                    getTemplatesBoard(),
+                    getLinesDB(),
+                ]);
+            })
+            .then((data) => {
+                props.onFetchBoardDataFromDb(data);
             });
-            props.onFetchPictures(picturesIds);
-        });
-        Promise.all([
-            getPicturesBoard(),
-            getTemplatesBoard(),
-            getLinesDB(),
-        ]).then((data) => {
-            props.onFetchBoardDataFromDb(data);
-        });
     }, []);
 
     const boardRef = useRef(null);

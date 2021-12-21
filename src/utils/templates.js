@@ -2,9 +2,9 @@ import Note from '../components/content_templates/Note';
 import PhotoCard from '../components/content_templates/PhotoCard';
 import NewsPaper from '../components/content_templates/NewsPaper';
 import Poster from '../components/content_templates/Poster';
-import photo from '../images/photo.jpg';
 import poster from '../images/poster.jpg';
 import imagePlantPipe from '../images/plantPipe.jpg';
+import gates from '../images/gates.jpg';
 
 export const templates = [
     {
@@ -19,7 +19,7 @@ export const templates = [
         scaleFactor: null,
         id: 'photoCard',
         wide: false,
-        imageSrc: photo,
+        imageSrc: gates,
     },
     {
         newsPaper: NewsPaper,

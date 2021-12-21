@@ -19,15 +19,15 @@ export const CHANGE_IMAGE_SRC = 'CHANGE_IMAGE_SRC';
 export const FETCH_BOARD_DATA_FROM_DB = 'FETCH_BOARD_DATA_FROM_DB';
 export const FETCH_LINES_FROM_LOCAL_STORAGE = 'FETCH_LINES_FROM_LOCAL_STORAGE';
 
-export const fetchBoardDataFromDB = (data) => {
-    return {
+export const fetchBoardDataFromDB = (data) => async (dispatch) => {
+    dispatch({
         type: FETCH_BOARD_DATA_FROM_DB,
         payload: {
             picturesBoard: data[0],
             templatesBoard: data[1],
             lines: data[2],
         },
-    };
+    });
 };
 
 export const addElementToBoard = (startDrag) => {
