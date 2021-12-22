@@ -1,3 +1,5 @@
+import poster from '../images/poster.jpg';
+
 export const intialBoardData = {
     templates: [
         {
@@ -8,7 +10,7 @@ export const intialBoardData = {
                 clientX: 224,
                 clientY: 213,
             },
-            imageSrc: 'http://localhost:8080/images/poster.jpg',
+            imageSrc: poster,
             elementName: 'poster',
             list: 'templatesBoard',
             coords: {

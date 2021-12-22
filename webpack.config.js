@@ -3,13 +3,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-console.log('webpack config', __dirname);
+const isDevMode = process.env.NODE_ENV === 'development';
+const developmentPath = 'http://localhost:8080';
+const productionPath =
+    'https://pushkarskayarita.github.io/investigation-board/';
 
 const clientConfig = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
-        publicPath: 'http://localhost:8080',
+        publicPath: isDevMode ? developmentPath : productionPath,
     },
     devtool: 'source-map',
     devServer: {
