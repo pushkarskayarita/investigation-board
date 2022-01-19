@@ -4,7 +4,7 @@ import NewsPaper from '../components/content_templates/NewsPaper';
 import Poster from '../components/content_templates/Poster';
 import poster from '../images/poster.jpg';
 import imagePlantPipe from '../images/plantPipe.jpg';
-import gates from '../images/gates.jpg';
+import puppy from '../images/puppy.jpg';
 
 export const templates = [
     {
@@ -19,7 +19,7 @@ export const templates = [
         scaleFactor: null,
         id: 'photoCard',
         wide: false,
-        imageSrc: gates,
+        imageSrc: puppy,
     },
     {
         newsPaper: NewsPaper,

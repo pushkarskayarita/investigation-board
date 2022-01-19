@@ -180,6 +180,7 @@ const Draggable = ({
                     top: position ? `${position.top}px` : undefined,
                     width: wide ? wideBoxWidth : boxWidth,
                     maxWidth: wideBoxWidth,
+                    userSelect: 'none',
                 }}
                 className={
                     activeElement.id === startDrag.id

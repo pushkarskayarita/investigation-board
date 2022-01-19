@@ -77,7 +77,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "http://localhost:8080";
+/******/ 	__webpack_require__.p = "https://pushkarskayarita.github.io/investigation-board/";
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -21241,24 +21241,28 @@ setDebug(debug, dexieStackFrameFilter);
 
 //# sourceMappingURL=dexie.mjs.map
 
-// CONCATENATED MODULE: ./src/images/bill.jpg
-/* harmony default export */ var bill = (__webpack_require__.p + "/images/bill.jpg");
-// CONCATENATED MODULE: ./src/images/protest3.jpg
-/* harmony default export */ var protest3 = (__webpack_require__.p + "/images/protest3.jpg");
+// CONCATENATED MODULE: ./src/images/charlie.jpg
+/* harmony default export */ var charlie = (__webpack_require__.p + "/images/charlie.jpg");
 // CONCATENATED MODULE: ./src/images/vaccine.jpg
 /* harmony default export */ var vaccine = (__webpack_require__.p + "/images/vaccine.jpg");
 // CONCATENATED MODULE: ./src/images/news.jpg
 /* harmony default export */ var news = (__webpack_require__.p + "/images/news.jpg");
 // CONCATENATED MODULE: ./src/images/tower.jpg
 /* harmony default export */ var tower = (__webpack_require__.p + "/images/tower.jpg");
+// CONCATENATED MODULE: ./src/images/puppy.jpg
+/* harmony default export */ var puppy = (__webpack_require__.p + "/images/puppy.jpg");
 // CONCATENATED MODULE: ./src/utils/loadedDB.js
 
 
 
 
 
-var loadedImagesUrls = new Map([['QdO4Ss6o', bill], ['V3_AeZxH', news], ['fo7mVkrM', vaccine], ['xRdg8h1y', tower], ['zRWeDkrH', protest3]]);
+var loadedImagesUrls = new Map([['QdO4Ss6o', puppy], ['V3_AeZxH', news], ['fo7mVkrM', vaccine], ['xRdg8h1y', tower], ['zRWeDkrH', charlie]]);
+// CONCATENATED MODULE: ./src/images/poster.jpg
+/* harmony default export */ var poster = (__webpack_require__.p + "/images/poster.jpg");
 // CONCATENATED MODULE: ./src/utils/initialBoardData.js
+
+
 var intialBoardData = {
   templates: [{
     id: '7ztRPD_1',
@@ -21268,7 +21272,7 @@ var intialBoardData = {
       clientX: 224,
       clientY: 213
     },
-    imageSrc: 'http://localhost:8080/images/poster.jpg',
+    imageSrc: poster,
     elementName: 'poster',
     list: 'templatesBoard',
     coords: {
@@ -21284,14 +21288,14 @@ var intialBoardData = {
       clientX: 225,
       clientY: 200
     },
-    imageSrc: '',
+    imageSrc: puppy,
     elementName: 'photoCard',
     list: 'templatesBoard',
     coords: {
       left: 351.9375,
       top: 36.73750305175781
     },
-    loadedPictureFileId: 'QdO4Ss6o'
+    loadedPictureFileId: ''
   }],
   lines: {
     id: 1,
@@ -22458,12 +22462,8 @@ function Poster_Poster(_ref) {
 }
 
 /* harmony default export */ var content_templates_Poster = (Poster_Poster);
-// CONCATENATED MODULE: ./src/images/poster.jpg
-/* harmony default export */ var poster = (__webpack_require__.p + "/images/poster.jpg");
 // CONCATENATED MODULE: ./src/images/plantPipe.jpg
 /* harmony default export */ var plantPipe = (__webpack_require__.p + "/images/plantPipe.jpg");
-// CONCATENATED MODULE: ./src/images/gates.jpg
-/* harmony default export */ var gates = (__webpack_require__.p + "/images/gates.jpg");
 // CONCATENATED MODULE: ./src/utils/templates.js
 
 
@@ -22483,7 +22483,7 @@ var templates = [{
   scaleFactor: null,
   id: 'photoCard',
   wide: false,
-  imageSrc: gates
+  imageSrc: puppy
 }, {
   newsPaper: content_templates_NewsPaper,
   scaleFactor: 0.3,
@@ -24104,7 +24104,8 @@ var Draggable_Draggable = function Draggable(_ref) {
       left: position ? "".concat(position.left, "px") : undefined,
       top: position ? "".concat(position.top, "px") : undefined,
       width: wide ? wideBoxWidth : boxWidth,
-      maxWidth: wideBoxWidth
+      maxWidth: wideBoxWidth,
+      userSelect: 'none'
     },
     className: activeElement.id === startDrag.id ? "".concat(drag_Draggable.active, " ").concat(drag_Draggable.boardItem) : drag_Draggable.boardItem,
     onDragStart: function onDragStart(event) {

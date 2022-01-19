@@ -1,4 +1,5 @@
 import poster from '../images/poster.jpg';
+import puppy from '../images/puppy.jpg';
 
 export const intialBoardData = {
     templates: [
@@ -27,14 +28,14 @@ export const intialBoardData = {
                 clientX: 225,
                 clientY: 200,
             },
-            imageSrc: '',
+            imageSrc: puppy,
             elementName: 'photoCard',
             list: 'templatesBoard',
             coords: {
                 left: 351.9375,
                 top: 36.73750305175781,
             },
-            loadedPictureFileId: 'QdO4Ss6o',
+            loadedPictureFileId: '',
         },
     ],
     lines: {
